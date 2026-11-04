@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message Gazette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Lora&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEE1EF; --paper-light:#F8F1F8; --paper-dark:#E0CCE0; --card:#F5ECF5;
+  --maroon:#481C4A; --maroon-dark:#1D001E; --gold:#E8B04C; --ink:#221122; --edge:#C6A8C7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper-dark);color:var(--ink);font-family:Lora,serif;line-height:1.7}
+.page{position:relative;overflow:hidden;max-width:1280px;margin:0 auto;background:radial-gradient(circle at 15% 8%,var(--paper-light),var(--paper) 55%,var(--paper-dark))}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;color:var(--maroon-dark);margin:0;line-height:1.05}
+p{margin:0}
+a{color:var(--maroon)}
+a:hover{color:#1D001E}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hand{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--maroon)}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:8px;top:8px;background:var(--paper);padding:8px;z-index:10}
+
+/* Header */
+.dateline{background:var(--maroon-dark);color:var(--paper);text-align:center;padding:0;height:50px;line-height:50px;position:relative;overflow:hidden;font-size:.8rem;letter-spacing:.14em}
+.nav{background:var(--maroon);display:flex;justify-content:center;flex-wrap:wrap}
+.nav a{color:var(--paper);text-decoration:none;font-size:.9rem;padding:13px 12px;min-height:44px}
+.nav a:hover{background:var(--maroon-dark);color:#fff}
+.masthead{padding:22px 56px 10px}
+.strip{height:18px;width:100%;display:block}
+.masthead-row{display:flex;align-items:center;justify-content:center;gap:36px;padding:14px 0}
+.masthead h1{font-size:clamp(2.8rem,8vw,5.5rem);text-align:center}
+.masthead .tagline{font-size:clamp(1rem,2.4vw,1.4rem);text-align:center;margin-top:6px}
+.double-rule{border-top:4px double var(--maroon);height:6px}
+
+/* Page views (Home / Team / Submit) */
+.view{display:none}
+.view.active{display:block}
+.view>section:first-child{margin-top:0!important}
+.nav a.on{background:var(--maroon-dark);color:#fff;box-shadow:inset 0 -3px 0 var(--gold)}
+
+/* Layout */
+main{padding:40px 56px}
+.front{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start}
+.front h2{font-size:clamp(2.2rem,5vw,3.4rem);margin:6px 0 10px}
+.drop{float:left;font-family:'Cormorant Garamond',serif;font-size:4.7rem;line-height:.8;padding:6px 10px 0 0;color:var(--maroon)}
+.section-title{font-size:2.5rem;margin:0 0 22px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+
+/* Paper cards */
+.card{background:var(--card);border:1px solid var(--edge);padding:22px;box-shadow:0 6px 14px rgba(29,0,30,.2);transform:var(--r,none);animation:up .9s ease both}
+.card:nth-child(2){animation-delay:.15s}
+.card:nth-child(3){animation-delay:.3s}
+.card h3{font-size:1.9rem;margin:8px 0}
+.card .row{display:flex;justify-content:space-between;align-items:center}
+.polaroid{--r:rotate(2.5deg);padding:16px 16px 30px;text-align:center}
+
+/* Editor sections */
+.note{margin-top:56px;display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:center;padding:34px}
+.note h2{font-size:clamp(2rem,4vw,2.75rem);margin:6px 0 14px}
+.letter{margin-top:56px;background:var(--maroon);color:var(--paper);padding:44px;display:grid;grid-template-columns:1fr 3fr;gap:36px;align-items:center}
+.letter h2{color:var(--paper);font-size:2.4rem}
+.letter .hand{color:var(--paper);font-size:1.25rem}
+.letter-art{text-align:center}
+
+footer{background:var(--maroon-dark);color:var(--paper);padding:28px 56px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.9rem}
+footer a{color:var(--paper)}
+
+/* Illustration motion */
+.fl{animation:fl 5s ease-in-out infinite}
+.fk{transform-box:fill-box;transform-origin:50% 100%;animation:fk 1.6s ease-in-out infinite}
+.tw{animation:tw 2.4s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes fk{0%,100%{transform:scale(1)}50%{transform:scale(.88,1.14)}}
+@keyframes tw{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes up{from{opacity:0;transform:translateY(20px) rotate(0)}to{opacity:1;transform:var(--r,none)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* Tablet and phone */
+@media (max-width:860px){
+  .masthead,main,footer{padding-left:24px;padding-right:24px}
+  .front,.grid3,.note,.letter{grid-template-columns:1fr}
+  .front{gap:32px}
+  .polaroid{max-width:340px;margin:0 auto}
+  .note{padding:24px}
+  .letter{padding:28px}
+  .letter-art{max-width:160px;margin:0 auto}
+  .note .portrait{max-width:220px;margin:0 auto}
+}
+@media (max-width:560px){
+  .masthead-row .fl-wrap{display:none}
+  .nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+  .nav a{white-space:nowrap}
+}
+
+/* Welcome intro: title appears */
+#intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#1D001E;transition:opacity 1s ease,visibility 0s 1s}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+#intro .txt{margin:0;padding:0 24px;text-align:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(2.6rem,9vw,6rem);line-height:1.1;color:#EEE1EF;letter-spacing:.04em;opacity:0;transform:translateY(14px);transition:opacity 1.6s ease,transform 1.6s ease}
+#intro.lit .txt{opacity:1;transform:none}
+#introSkip{position:absolute;right:20px;bottom:20px;background:transparent;border:1px solid #EEE1EF;color:#EEE1EF;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;padding:6px 16px;border-radius:20px;cursor:pointer}
+#introSkip:hover{background:#EEE1EF;color:#1D001E}
+
+/* Formal details, deco, letter, team, form */
+.page>*:not(.deco){position:relative;z-index:1}
+.deco{position:absolute;inset:0;pointer-events:none;z-index:0!important}
+.dd{position:absolute;color:var(--maroon);opacity:.5}
+.dd.spin{opacity:.13;animation:spin 120s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes swing{from{transform:rotate(-26deg)}to{transform:rotate(26deg)}}
+.walker{position:absolute;left:-50px;bottom:0;width:30px;height:48px;animation:cross 24s linear infinite}
+@keyframes cross{to{left:calc(100% + 50px)}}
+.walker .wl{transform-origin:50% 0;transform-box:fill-box;animation:swing .6s ease-in-out infinite alternate}
+.walker .b{animation-direction:alternate-reverse}
+.letter-wrap{margin-top:56px;transform:rotate(-.6deg);filter:drop-shadow(0 10px 14px rgba(29,0,30,.35))}
+.letter-wrap{max-width:900px;margin-left:auto;margin-right:auto}
+.note.paper{position:relative;grid-template-columns:1fr;margin:0;border:0;animation:none;padding:60px 56px;background:linear-gradient(180deg,transparent calc(33.3% - 5px),rgba(70,30,72,.28) calc(33.3% - 1px),rgba(255,248,225,.55) calc(33.3% + 1px),rgba(70,30,72,.12) calc(33.3% + 5px),transparent calc(33.3% + 12px)),linear-gradient(180deg,transparent calc(66.6% - 5px),rgba(70,30,72,.28) calc(66.6% - 1px),rgba(255,248,225,.55) calc(66.6% + 1px),rgba(70,30,72,.12) calc(66.6% + 5px),transparent calc(66.6% + 12px)),linear-gradient(90deg,transparent calc(50% - 6px),rgba(70,30,72,.25) calc(50% - 1px),rgba(255,248,225,.5) calc(50% + 1px),transparent calc(50% + 8px)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .2 0 0 0 0 .08 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(ellipse 90px 60px at 96% 22%,rgba(25,0,26,.55),transparent 70%),radial-gradient(ellipse 120px 70px at 3% 78%,rgba(25,0,26,.5),transparent 70%),radial-gradient(ellipse 70px 50px at 62% 99%,rgba(25,0,26,.5),transparent 70%),radial-gradient(ellipse 80px 45px at 28% 1%,rgba(25,0,26,.45),transparent 70%),radial-gradient(circle at 20% 15%,#F2E7F3,#E8D8E9 60%,#D7C0D8);box-shadow:inset 0 0 70px rgba(45,10,46,.55),inset 0 0 22px rgba(15,0,16,.75),inset 0 0 4px rgba(0,0,0,.9);clip-path:polygon(0 2.5%,2% 1%,4% 2.6%,7% .4%,10% 1.8%,14% 0,18% 1.6%,23% .3%,27% 2%,33% 0,38% 1.4%,45% .2%,50% 1.8%,57% 0,63% 1.5%,69% .2%,74% 1.9%,80% 0,86% 1.4%,91% .3%,96% 1.6%,100% 0,99% 9%,100% 17%,98.6% 26%,100% 35%,99% 44%,100% 55%,98.7% 64%,100% 74%,99.2% 84%,100% calc(100% - 64px),calc(100% - 64px) 100%,92% 98.6%,86% 100%,78% 98.4%,70% 99.8%,62% 98.2%,54% 100%,46% 98.6%,38% 100%,30% 98.3%,22% 99.8%,14% 98.5%,8% 100%,3% 98.6%,0 100%,1.3% 91%,0 82%,1.2% 72%,0 62%,1.4% 52%,0 42%,1.2% 31%,0 20%,1.3% 11%)}
+.note.paper::after{content:'';position:absolute;right:0;bottom:0;width:64px;height:64px;background:linear-gradient(135deg,#F4EBF4 0%,#D8BFD9 46%,#834785 50%,transparent 50.5%);pointer-events:none}
+.sign{font-family:'Pinyon Script',cursive;font-size:2.4rem;line-height:1.2;color:var(--maroon-dark);margin-top:14px}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.pass{padding:0;overflow:hidden;text-align:center;position:relative}
+.pass .band{background:var(--maroon);color:var(--paper);padding:10px;letter-spacing:.3em;font-size:.8rem}
+.pass .pbody{padding:24px 18px}
+.avatar{width:124px;height:124px;display:block;margin:0 auto 12px;border-radius:50%;border:3px solid var(--maroon)}
+.pass h3{font-size:1.9rem}
+.ini{font-size:.8rem;letter-spacing:.12em;margin-top:6px}
+.mini{position:absolute;right:-24px;top:34px;width:90px;height:90px;color:var(--maroon);opacity:.13}
+.sub{position:relative;overflow:hidden;padding:44px}
+.mini.big{width:240px;height:240px;right:-60px;top:-60px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+form label{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--maroon-dark);margin-bottom:16px}
+form input,form select,form textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;font:inherit;font-style:normal;font-family:Lora,serif;font-size:1rem;color:var(--ink);background:var(--paper-light);border:1px solid var(--edge);border-radius:2px}
+form textarea{resize:vertical}
+form button{background:var(--maroon);color:var(--paper);border:0;padding:13px 30px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.08em;cursor:pointer}
+form button:hover{background:var(--maroon-dark)}
+#subnote{margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--maroon)}
+@media (max-width:860px){.team,.fgrid{grid-template-columns:1fr}.dd:not(.spin){display:none}.note.paper{padding:40px 26px}.sub{padding:28px}}
+
+/* Letter from the Editor: light folded paper */
+.letter-wrap.light{transform:rotate(.5deg);filter:drop-shadow(0 8px 12px rgba(29,0,30,.28))}
+.letter-wrap.light .letter{margin:0}
+.letter.sheet{position:relative;color:var(--ink);padding:56px;background:linear-gradient(180deg,transparent calc(33.3% - 5px),rgba(90,50,92,.16) calc(33.3% - 1px),rgba(255,252,240,.7) calc(33.3% + 1px),rgba(90,50,92,.07) calc(33.3% + 5px),transparent calc(33.3% + 12px)),linear-gradient(180deg,transparent calc(66.6% - 5px),rgba(90,50,92,.16) calc(66.6% - 1px),rgba(255,252,240,.7) calc(66.6% + 1px),rgba(90,50,92,.07) calc(66.6% + 5px),transparent calc(66.6% + 12px)),linear-gradient(90deg,transparent calc(50% - 6px),rgba(90,50,92,.15) calc(50% - 1px),rgba(255,252,240,.65) calc(50% + 1px),transparent calc(50% + 8px)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .12 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(circle at 80% 20%,#FAF5FA,#F2E7F3 65%,#E8D8E9);box-shadow:inset 0 0 36px rgba(120,80,122,.22),inset 0 0 3px rgba(90,50,92,.4);clip-path:polygon(0 .8%,3% 0,8% .7%,14% 0,21% .6%,29% 0,37% .7%,45% 0,53% .6%,61% 0,69% .7%,77% 0,85% .6%,92% 0,100% .7%,99.5% 12%,100% 25%,99.4% 38%,100% 52%,99.5% 66%,100% 80%,99.6% 92%,100% 100%,92% 99.3%,84% 100%,75% 99.4%,66% 100%,57% 99.3%,48% 100%,39% 99.4%,30% 100%,21% 99.3%,12% 100%,calc(0% + 64px) 100%,0 calc(100% - 64px),.5% 88%,0 74%,.6% 60%,0 46%,.5% 32%,0 18%)}
+.letter.sheet h2{color:var(--maroon-dark)}
+.letter.sheet .hand{color:var(--maroon)}
+.letter.sheet::after{content:'';position:absolute;left:0;bottom:0;width:64px;height:64px;background:linear-gradient(225deg,#FAF5FA 0%,#E2CFE3 46%,#A15CA3 50%,transparent 50.5%);pointer-events:none}
+@media (max-width:860px){.letter.sheet{padding:40px 26px}}
+
+/* Meet the Team: letters */
+.pile{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 20px;margin:0 0 40px}
+.mini-env{width:96px;height:auto;filter:drop-shadow(0 4px 5px rgba(29,0,30,.3))}
+.env{position:relative;aspect-ratio:3/2;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .12 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(circle at 25% 20%,#F8F1F8,#F0E4F1 70%,#E4D2E5);border:1px solid var(--edge);box-shadow:0 8px 16px rgba(29,0,30,.25),inset 0 0 26px rgba(120,80,122,.2);transform:var(--r,none);animation:up .9s ease backwards;transition:transform .3s,box-shadow .3s}
+.env:hover{transform:rotate(0) translateY(-6px);box-shadow:0 14px 22px rgba(29,0,30,.3),inset 0 0 26px rgba(120,80,122,.2)}
+.env svg{display:block;width:100%;height:100%}
+@media (max-width:860px){.mini-env{width:70px}}
+</style>
+<noscript><style>#intro{display:none}</style></noscript>
+</head>
+<body>
+<!-- ===== WELCOME INTRO: the title appears before the page opens. Delete this whole block to remove it. ===== -->
+<div id="intro">
+  <p class="txt">The Message Gazette</p>
+  <button id="introSkip" type="button">Skip</button>
+</div>
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- Shared paisley motif, reused with <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="paisley" viewBox="0 0 60 80">
+    <g fill="none" stroke="currentColor" stroke-width="1.6">
+      <path d="M30 4C52 14 58 40 42 60 34 70 20 74 12 66 4 58 10 46 20 46 28 46 30 54 24 56 30 58 34 50 32 42 30 34 20 30 22 18 23 12 26 7 30 4Z"/>
+      <path d="M30 16C42 24 44 40 36 52" stroke-width="1"/>
+      <circle cx="26" cy="30" r="2" fill="currentColor"/><circle cx="34" cy="38" r="1.6" fill="currentColor"/>
+    </g>
+  </symbol>
+  <symbol id="mandala" viewBox="-60 -60 120 120"><g fill="none" stroke="currentColor" stroke-width="1"><circle r="57"/><circle r="50" stroke-dasharray="2 4"/><circle r="12"/><circle r="22" stroke-dasharray="1 3"/><g id="pt"><path d="M0-46C9-34 9-22 0-13C-9-22-9-34 0-46Z"/><path d="M0-40V-20"/><circle cy="-52" r="2" fill="currentColor"/></g><use href="#pt" transform="rotate(30)"/><use href="#pt" transform="rotate(60)"/><use href="#pt" transform="rotate(90)"/><use href="#pt" transform="rotate(120)"/><use href="#pt" transform="rotate(150)"/><use href="#pt" transform="rotate(180)"/><use href="#pt" transform="rotate(210)"/><use href="#pt" transform="rotate(240)"/><use href="#pt" transform="rotate(270)"/><use href="#pt" transform="rotate(300)"/><use href="#pt" transform="rotate(330)"/></g></symbol>
+  <symbol id="lotusd" viewBox="0 0 100 60"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M50 56C38 44 38 22 50 6 62 22 62 44 50 56Z"/><path d="M50 56C32 52 22 34 24 18 40 24 50 38 50 56Z"/><path d="M50 56C68 52 78 34 76 18 60 24 50 38 50 56Z"/><path d="M50 56C26 58 8 46 4 34 22 32 40 40 50 56Z"/><path d="M50 56C74 58 92 46 96 34 78 32 60 40 50 56Z"/></g></symbol>
+  <symbol id="diyad" viewBox="0 0 60 50"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 26Q30 56 54 26Z"/><path d="M30 24C24 16 28 10 30 3C32 10 36 16 30 24Z"/><circle cx="30" cy="36" r="2"/></g></symbol>
+  <symbol id="jhumka" viewBox="0 0 30 60"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 0V9"/><path d="M5 24a10 13 0 0 1 20 0z"/><path d="M8 24V34M15 24V38M22 24V34"/><circle cx="8" cy="37" r="2.5"/><circle cx="15" cy="41" r="2.5"/><circle cx="22" cy="37" r="2.5"/></g></symbol>
+  <symbol id="bangles" viewBox="0 0 60 60"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="26" cy="30" r="20"/><circle cx="34" cy="30" r="20"/><circle cx="30" cy="30" r="14" stroke-dasharray="2 3"/></g></symbol>
+  <symbol id="girl" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E2CEE3"/><ellipse cx="50" cy="42" rx="24" ry="26" fill="#150016"/><path d="M12 100C12 76 30 66 50 66C70 66 88 76 88 100Z" fill="var(--k)"/><path d="M38 67Q50 80 62 67" fill="none" stroke="#E8B04C" stroke-width="2"/><rect x="45" y="58" width="10" height="11" fill="var(--s)"/><ellipse cx="50" cy="46" rx="15" ry="18" fill="var(--s)"/><path d="M30 50C26 14 74 14 70 50C68 34 60 25 50 24C40 25 32 34 30 50Z" fill="var(--d)"/><path d="M31 47C42 28 58 28 69 47" fill="none" stroke="#E8B04C" stroke-width="1.2"/><path d="M30 50C22 68 24 86 34 98L42 80C36 70 36 60 38 52Z" fill="var(--d)"/><path d="M70 50C78 68 76 86 66 98L58 80C64 70 64 60 62 52Z" fill="var(--d)"/><circle cx="31" cy="60" r="2" fill="#E8B04C"/><circle cx="69" cy="60" r="2" fill="#E8B04C"/></symbol>
+  <symbol id="f-rose" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50" cy="48" r="38" fill="#A02D42" stroke="#6B1420" stroke-width="1.5"/><circle cx="50" cy="48" r="29" fill="#C24560" stroke="#6B1420"/><circle cx="50" cy="48" r="20" fill="#D45F78" stroke="#6B1420"/><path d="M50 48m-11 0a11 11 0 1 1 11 11" fill="none" stroke="#6B1420" stroke-width="1.6"/><path d="M50 48m-5 0a5 5 0 1 1 5 5" fill="none" stroke="#6B1420" stroke-width="1.4"/><path d="M26 30Q38 40 30 56M74 30Q62 40 70 56" fill="none" stroke="#6B1420" stroke-width="1"/></symbol><symbol id="f-sunflower" viewBox="0 0 100 100"><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(0.0 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(25.7 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(51.4 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(77.1 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(102.9 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(128.6 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(154.3 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(180.0 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(205.7 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(231.4 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(257.1 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(282.9 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(308.6 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(334.3 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(0.0 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(25.7 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(51.4 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(77.1 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(102.9 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(128.6 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(154.3 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(180.0 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(205.7 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(231.4 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(257.1 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(282.9 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(308.6 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(334.3 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><circle cx="50" cy="50" r="17" fill="#5A3318" stroke="#150016" stroke-width="1.5"/><circle cx="59.0" cy="50.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="56.4" cy="56.4" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="50.0" cy="59.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="43.6" cy="56.4" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="41.0" cy="50.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="43.6" cy="43.6" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="50.0" cy="41.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="56.4" cy="43.6" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="50" cy="50" r="3" fill="#8A5A30"/></symbol><symbol id="f-lotus" viewBox="0 0 100 100"><g transform="translate(0 18)"><path d="M50 56C38 44 38 22 50 6 62 22 62 44 50 56Z" fill="#F4A6B8" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C32 52 22 34 24 18 40 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C68 52 78 34 76 18 60 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C26 58 8 46 4 34 22 32 40 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C74 58 92 46 96 34 78 32 60 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/></g><path d="M8 84Q50 74 92 84" fill="none" stroke="#5E7A3C" stroke-width="3" stroke-linecap="round"/></symbol><symbol id="f-tulip" viewBox="0 0 100 100"><path d="M50 96V58" stroke="#5E7A3C" stroke-width="4" stroke-linecap="round"/><path d="M50 90C30 88 22 70 24 56 38 62 48 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M50 90C70 88 78 70 76 56 62 62 52 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M30 24C26 44 34 60 50 64 42 50 38 36 30 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M70 24C74 44 66 60 50 64 58 50 62 36 70 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M50 10C36 24 34 52 50 64 66 52 64 24 50 10Z" fill="#E0524A" stroke="#6B1420"/></symbol><symbol id="f-jasmine" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50.0" cy="33.0" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="66.2" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="60.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="40.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="33.8" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="50" cy="50" r="9" fill="#F2D27A" stroke="#BFAA78"/><circle cx="50" cy="50" r="3.5" fill="#E8B04C"/></symbol><symbol id="f-marigold" viewBox="0 0 100 100"><circle cx="80.0" cy="50.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="76.0" cy="65.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="65.0" cy="76.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="80.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="35.0" cy="76.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="24.0" cy="65.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="20.0" cy="50.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="24.0" cy="35.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="35.0" cy="24.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="20.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="65.0" cy="24.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="76.0" cy="35.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="68.1" cy="55.9" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="61.2" cy="65.4" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="69.0" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="38.8" cy="65.4" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="31.9" cy="55.9" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="31.9" cy="44.1" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="38.8" cy="34.6" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="31.0" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="61.2" cy="34.6" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="68.1" cy="44.1" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="59.0" cy="50.0" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="55.6" cy="57.0" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="48.0" cy="58.8" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="41.9" cy="53.9" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="41.9" cy="46.1" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="48.0" cy="41.2" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="55.6" cy="43.0" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="50" cy="50" r="5" fill="#C96A12"/></symbol><symbol id="miniEnv" viewBox="0 0 120 80"><rect x="2" y="2" width="116" height="76" rx="3" fill="#F2E7F3" stroke="#481C4A" stroke-width="1.5"/><path d="M2 2L60 46 118 2" fill="none" stroke="#481C4A" stroke-width="1.5"/><path d="M2 78L46 38M118 78L74 38" fill="none" stroke="#481C4A" stroke-width="1" opacity=".55"/><circle cx="60" cy="46" r="9" fill="var(--c,#481C4A)"/><circle cx="60" cy="46" r="4.5" fill="none" stroke="#F5ECF5" stroke-width="1.2"/></symbol>
+  <pattern id="diamonds" width="36" height="18" patternUnits="userSpaceOnUse">
+    <path d="M18 2L28 9 18 16 8 9Z" fill="none" stroke="#481C4A" stroke-width="1.2"/>
+    <circle cx="18" cy="9" r="2" fill="#481C4A"/>
+  </pattern>
+</svg>
+
+<div class="page">
+<div class="deco" aria-hidden="true"><svg class="dd spin" style="width:380px;height:380px;top:60px;left:-150px" aria-hidden="true"><use href="#mandala"/></svg><svg class="dd spin" style="width:320px;height:320px;top:980px;right:-130px" aria-hidden="true"><use href="#mandala"/></svg><svg class="dd spin" style="width:360px;height:360px;top:1750px;left:-150px" aria-hidden="true"><use href="#mandala"/></svg><svg class="dd spin" style="width:300px;height:300px;top:2500px;right:-120px" aria-hidden="true"><use href="#mandala"/></svg><svg class="dd fl" style="width:44px;height:58px;top:520px;left:14px" aria-hidden="true"><use href="#paisley"/></svg><svg class="dd fl" style="width:80px;height:48px;top:700px;right:16px" aria-hidden="true"><use href="#lotusd"/></svg><svg class="dd fl" style="width:56px;height:46px;top:1180px;left:14px" aria-hidden="true"><use href="#diyad"/></svg><svg class="dd fl" style="width:34px;height:68px;top:1420px;right:20px" aria-hidden="true"><use href="#jhumka"/></svg><svg class="dd fl" style="width:58px;height:58px;top:1560px;left:16px" aria-hidden="true"><use href="#bangles"/></svg><svg class="dd fl" style="width:40px;height:54px;top:2040px;right:16px" aria-hidden="true"><use href="#paisley"/></svg><svg class="dd fl" style="width:76px;height:46px;top:2300px;left:14px" aria-hidden="true"><use href="#lotusd"/></svg><svg class="dd fl" style="width:52px;height:44px;top:2700px;right:18px" aria-hidden="true"><use href="#diyad"/></svg></div>
+  <header>
+    <div class="dateline">VOL. 3 · EDITION 1 · 11/3/2026<svg class="walker" viewBox="0 0 40 64" aria-hidden="true"><rect x="14" y="3" width="12" height="4" rx="2" fill="#6C356E"/><path d="M12 6C6 10 6 18 12 20H28C34 18 34 10 28 6Z" fill="#8C488E"/><path d="M9 13H31" stroke="#E8B04C" stroke-width="1.5"/><path d="M26 34C32 30 32 20 29 15" fill="none" stroke="#D9A27A" stroke-width="3" stroke-linecap="round"/><g class="wl a"><rect x="14" y="52" width="5" height="11" rx="2.5" fill="#D4B9D5"/></g><g class="wl b"><rect x="21" y="52" width="5" height="11" rx="2.5" fill="#D4B9D5"/></g><circle cx="20" cy="27" r="4.5" fill="#D9A27A"/><path d="M12 56L13 33C14 31 17 31 20 31C23 31 26 31 27 33L28 56Z" fill="#F2E8F3"/><path d="M13 28C12 18 28 18 27 28C26 23 23 21 20 21C17 21 14 23 13 28Z" fill="#481C4A"/><path d="M13 28C9 38 10 46 14 52L18 40Z" fill="#481C4A"/></svg></div>
+    <!-- Replace each # with your real page link -->
+    <nav class="nav" aria-label="Main">
+      <a href="#home">Home</a><a href="#">School News</a><a href="#">Events</a><a href="#">Spotlight</a><a href="#">Opinions</a><a href="#">Creative Corner</a><a href="#team">Meet the Team</a><a href="#submit">Submit Your Work</a><a href="#">Archives</a>
+    </nav>
+    <div class="masthead">
+      <svg class="strip" aria-hidden="true"><rect width="100%" height="18" fill="url(#diamonds)"/></svg>
+      <div class="masthead-row">
+        <div class="fl-wrap" style="transform:scaleX(-1);color:var(--maroon)"><svg class="fl" width="54" height="72" aria-hidden="true"><use href="#paisley"/></svg></div>
+        <div>
+          <h1>Message Gazette</h1>
+          <p class="hand tagline">Tales, thoughts, and happenings from our corner of the world</p>
+        </div>
+        <div class="fl-wrap" style="color:var(--maroon)"><svg class="fl" width="54" height="72" aria-hidden="true"><use href="#paisley"/></svg></div>
+      </div>
+      <div class="double-rule"></div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="view active" id="v-home">
+    <!-- Front page story -->
+    <section class="front">
+      <article>
+        <h2>A Lantern in the Library Corner</h2>
+        <p class="hand" style="font-size:1.05rem;margin-bottom:14px">by [Writer name] · [Class]</p>
+        <p><span class="drop">O</span>nce upon a Tuesday, the library lamps were lit a little earlier than usual, and every girl who walked in felt the hush of a story about to begin. [Your front page story goes here.]</p>
+      </article>
+
+      <figure class="card polaroid" style="margin:0">
+        <!-- Lantern arch with flickering diya -->
+        <svg viewBox="0 0 200 260" width="220" style="max-width:100%;height:auto" role="img" aria-label="An arch with a crescent moon, stars and a lit diya">
+          <path d="M20 250V110C20 80 60 70 100 20 140 70 180 80 180 250Z" fill="#E2CEE3" stroke="#481C4A" stroke-width="3"/>
+          <path d="M44 250V118C44 96 76 88 100 54 124 88 156 96 156 250Z" fill="#481C4A"/>
+          <circle cx="100" cy="130" r="16" fill="#F2E8F3"/><circle cx="107" cy="126" r="14" fill="#481C4A"/>
+          <circle class="tw" cx="70" cy="150" r="2" fill="#F2E8F3"/>
+          <circle class="tw" style="animation-delay:.8s" cx="132" cy="110" r="2" fill="#F2E8F3"/>
+          <circle class="tw" style="animation-delay:1.5s" cx="125" cy="165" r="1.6" fill="#F2E8F3"/>
+          <path d="M84 232Q100 248 116 232Z" fill="#F2E8F3"/>
+          <path class="fk" d="M100 208C94 218 96 226 100 226 104 226 106 218 100 208Z" fill="#E8B04C"/>
+        </svg>
+        <figcaption class="hand" style="font-size:1.1rem;margin-top:10px">where the stories keep their light</figcaption>
+      </figure>
+    </section>
+
+    <div class="double-rule" style="margin:44px 0 28px"></div>
+
+    <!-- Latest articles -->
+    <h2 class="section-title">The Daily Tale</h2>
+    <section class="grid3">
+      <article class="card" style="--r:rotate(-1.2deg)">
+        <div class="row"><p class="hand" style="font-size:1.1rem">School News</p><svg class="fl" width="22" height="30" style="color:var(--maroon)" aria-hidden="true"><use href="#paisley"/></svg></div>
+        <h3>The Season’s First Whispers</h3>
+        <p style="font-size:.95rem">[A short taste of the article, in a warm, storybook voice.]</p>
+      </article>
+      <article class="card" style="--r:rotate(.8deg)">
+        <div class="row"><p class="hand" style="font-size:1.1rem">Spotlight</p><svg class="fl" width="22" height="30" style="color:var(--maroon)" aria-hidden="true"><use href="#paisley"/></svg></div>
+        <h3>Threads and Thistles</h3>
+        <p style="font-size:.95rem">[A student achievement or interview, in a line or two.]</p>
+      </article>
+      <article class="card" style="--r:rotate(-.6deg)">
+        <div class="row"><p class="hand" style="font-size:1.1rem">Creative Corner</p><svg class="fl" width="22" height="30" style="color:var(--maroon)" aria-hidden="true"><use href="#paisley"/></svg></div>
+        <h3>A Poem Found Between Pages</h3>
+        <p style="font-size:.95rem">[A first line of poetry or prose to draw readers in.]</p>
+      </article>
+    </section>
+
+    <!-- Editor-in-Chief's note -->
+    <div class="letter-wrap"><section class="card note paper" style="--r:none">
+      <div>
+        <p class="hand" style="font-size:1.4rem">From the Desk of the Editor-in-Chief</p>
+        <h2>Every voice deserves a page.</h2>
+        <p><span class="drop">W</span>elcome to the first issue of Message Gazette, a little corner where our voices are written down, passed along and kept. [Your note to readers goes here.]</p>
+        <p class="sign">[Name]</p><p class="hand" style="font-size:1.1rem">Editor-in-Chief</p>
+      </div>
+    </section></div>
+
+    <!-- Letter from the Editor -->
+    <div class="letter-wrap light">
+    <section class="letter sheet">
+      <div class="letter-art">
+        <svg viewBox="0 0 100 60" width="150" style="max-width:100%;height:auto" aria-hidden="true">
+          <g fill="rgba(72,28,74,.08)" stroke="#481C4A" stroke-width="1.5">
+            <path d="M50 56C38 44 38 22 50 6 62 22 62 44 50 56Z"/><path d="M50 56C32 52 22 34 24 18 40 24 50 38 50 56Z"/><path d="M50 56C68 52 78 34 76 18 60 24 50 38 50 56Z"/><path d="M50 56C26 58 8 46 4 34 22 32 40 40 50 56Z"/><path d="M50 56C74 58 92 46 96 34 78 32 60 40 50 56Z"/>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <h2>Letter from the Editor</h2>
+        <p style="margin-top:10px">Dear readers, this gazette is stitched from our stories, one thread at a time. [Editor’s letter goes here.]</p>
+        <p class="hand" style="margin-top:10px">With love, [Editor name]</p>
+      </div>
+    </section>
+    </div>
+
+    </div>
+    <div class="view" id="v-team">
+    <section id="team" style="margin-top:72px"><h2 class="section-title" style="text-align:center;margin-bottom:6px">Meet the Team</h2><p class="hand" style="text-align:center;font-size:1.3rem;margin-bottom:30px">The editors, writers and artists behind Message Gazette</p><div class="pile" aria-hidden="true"><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#481C4A;transform:rotate(-9deg);animation-delay:0.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#87428A;transform:rotate(6deg);animation-delay:0.5s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#E8B04C;transform:rotate(-4deg);animation-delay:1.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#1D001E;transform:rotate(10deg);animation-delay:1.5s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#682F6A;transform:rotate(-7deg);animation-delay:2.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#8C488E;transform:rotate(5deg);animation-delay:2.5s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#5B285D;transform:rotate(-11deg);animation-delay:3.0s"><use href="#miniEnv"/></svg></div><div class="team"><article class="env" style="--r:rotate(-1.6deg);animation-delay:0.00s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Aiza Rehman, Editor-in-Chief"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-rose" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="103" lengthAdjust="spacingAndGlyphs">Aiza Rehman</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A">Editor-in-Chief</text><path d="M142 146H268M142 160H248" stroke="#221122" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F5ECF5" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-rose" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(1.2deg);animation-delay:0.12s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Hira Qureshi, Deputy Editor"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-lotus" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="113" lengthAdjust="spacingAndGlyphs">Hira Qureshi</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A">Deputy Editor</text><path d="M142 146H268M142 160H248" stroke="#221122" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F5ECF5" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-lotus" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(-0.8deg);animation-delay:0.24s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Mahnoor Siddiqui, Head of Writing"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-sunflower" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="150" lengthAdjust="spacingAndGlyphs">Mahnoor Siddiqui</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A">Head of Writing</text><path d="M142 146H268M142 160H248" stroke="#221122" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F5ECF5" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-sunflower" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(1.1deg);animation-delay:0.36s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Zoya Malik, Features Editor"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-tulip" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="94" lengthAdjust="spacingAndGlyphs">Zoya Malik</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A">Features Editor</text><path d="M142 146H268M142 160H248" stroke="#221122" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F5ECF5" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-tulip" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(-1.2deg);animation-delay:0.48s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Noor Fatima, Art and Illustration"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-jasmine" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="103" lengthAdjust="spacingAndGlyphs">Noor Fatima</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A">Art and Illustration</text><path d="M142 146H268M142 160H248" stroke="#221122" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F5ECF5" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-jasmine" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(0.7deg);animation-delay:0.60s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Sana Khan, Photography"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-marigold" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="85" lengthAdjust="spacingAndGlyphs">Sana Khan</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A">Photography</text><path d="M142 146H268M142 160H248" stroke="#221122" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F5ECF5" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-marigold" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article></div></section>
+    </div>
+    <div class="view" id="v-submit">
+    <section id="submit" class="card sub" style="--r:none;margin-top:72px"><svg class="mini big" aria-hidden="true"><use href="#mandala"/></svg><p class="hand" style="font-size:1.3rem">Contributions Welcome</p><h2 style="font-size:clamp(2rem,4vw,2.8rem);margin:4px 0 8px">Submit Your Work</h2><p style="margin-bottom:22px">Paste your article, poem or story below. It will be delivered directly to the editors’ inbox for review.</p>
+      <form id="subform" action="https://formsubmit.co/YOUR-EMAIL@example.com" method="POST"><input type="hidden" name="_subject" value="New submission: Message Gazette"><input type="hidden" name="_captcha" value="false"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="fgrid"><label>Full name<input name="name" required></label><label>Class and section<input name="class" required></label><label>Email (optional)<input type="email" name="email"></label><label>Category<select name="category"><option>School News</option><option>Spotlight</option><option>Opinions and Essays</option><option>Creative Corner</option></select></label></div>
+        <label>Title<input name="title" required></label><label>Your work (paste it here)<textarea name="submission" rows="10" required></textarea></label>
+        <button type="submit">Send to the Editors</button><p id="subnote" role="status"></p></form></section>
+    </div>
+  </main>
+
+  <footer>
+    <span>Message Grammar School - Girls</span>
+    <span><a href="mailto:gazette@example.com">gazette@[school-email]</a> · <a href="#">Instagram</a> · <a href="#">WhatsApp</a></span>
+  </footer>
+</div>
+<script>
+/* Welcome intro timeline */
+(function(){
+  var intro=document.getElementById('intro');
+  if(!intro)return;
+  var timers=[];
+  function later(f,ms){timers.push(setTimeout(f,ms));}
+  function finish(){
+    timers.forEach(clearTimeout);
+    intro.classList.add('done');
+    document.body.style.overflow='';
+    setTimeout(function(){intro.style.display='none';},1100);
+  }
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){intro.style.display='none';return;}
+  document.body.style.overflow='hidden';
+  later(function(){intro.classList.add('lit');},400);
+  later(finish,3800);
+  document.getElementById('introSkip').addEventListener('click',finish);
+})();
+</script>
+<script>
+/* Page switching: #home, #team, #submit */
+(function(){
+  var views={home:'v-home',team:'v-team',submit:'v-submit'};
+  var links=document.querySelectorAll('.nav a');
+  function show(){
+    var key=(location.hash||'#home').slice(1);
+    if(!views[key])key='home';
+    Object.keys(views).forEach(function(k){
+      document.getElementById(views[k]).classList.toggle('active',k===key);
+    });
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+key);});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  show();
+})();
+</script>
+<script>
+/* Submit form: sends the pasted work to the editors' email via FormSubmit */
+(function(){
+  var f=document.getElementById('subform'),note=document.getElementById('subnote');
+  if(!f)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();note.textContent='Sending…';
+    fetch(f.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{Accept:'application/json'},body:new FormData(f)})
+      .then(function(r){if(!r.ok)throw 0;f.reset();note.textContent='Thank you. Your work has been sent to the editors.';})
+      .catch(function(){note.textContent='Sorry, something went wrong. Please try again in a moment.';});
+  });
+})();
+</script>
+<script>
+(function(){
+var PAGES=['page-01.jpg','page-02.jpg','page-03.jpg','page-04.jpg','page-05.jpg','page-06.jpg','page-07.jpg','page-08.jpg','page-09.jpg','page-10.jpg','page-11.jpg'];  
+var TITLE='Vol. 1 · Edition 1', DATE='October 15, 2023';
+
+  var main=document.querySelector('main'); if(!main) return;
+  var css='.fbwrap{text-align:center;margin-top:8px}'+
+  '.fbwrap.fs{position:fixed;inset:0;z-index:9000;background:#1D001E;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0}'+
+  '.fbstage{position:relative;margin:0 auto;touch-action:pan-y;cursor:pointer;user-select:none;-webkit-user-select:none;filter:drop-shadow(0 16px 22px rgba(40,15,5,.4))}'+
+  '.fbbook{position:relative;width:100%;height:100%;perspective:2600px;transition:transform .9s cubic-bezier(.45,.05,.25,1)}'+
+  '.fbleaf{position:absolute;left:50%;top:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.45,.05,.25,1)}'+
+  '.fbleaf.flipped{transform:rotateY(-180deg)}'+
+  '.fbface{position:absolute;inset:0;overflow:hidden;background:#DCC6DD;backface-visibility:hidden;-webkit-backface-visibility:hidden}'+
+  '.fbface.fbbk{transform:rotateY(180deg)}'+
+  '.fbface img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}'+
+  '.fbface::after{content:"";position:absolute;inset:0;pointer-events:none}'+
+  '.fbface.fbfr::after{background:linear-gradient(90deg,rgba(30,5,30,.3),rgba(30,5,30,0) 10%)}'+
+  '.fbface.fbbk::after{background:linear-gradient(270deg,rgba(30,5,30,.3),rgba(30,5,30,0) 10%)}'+
+  '.fbbar{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px}'+
+  '.fbwrap.fs .fbbar{margin-top:14px}'+
+  '.fbbtn{background:var(--maroon,#481C4A);color:var(--paper,#EEE1EF);border:0;padding:10px 24px;font-family:"Cormorant Garamond",serif;font-size:1.15rem;letter-spacing:.06em;cursor:pointer}'+
+  '.fbbtn:hover{background:var(--maroon-dark,#1D001E)}'+
+  '.fbbtn:disabled{opacity:.35;cursor:default}'+
+  '.fbbtn.alt{background:transparent;color:var(--maroon,#481C4A);border:1px solid var(--maroon,#481C4A)}'+
+  '.fbbtn.alt:hover{background:var(--maroon,#481C4A);color:var(--paper,#EEE1EF)}'+
+  '.fbwrap.fs .fbbtn.alt{color:#EEE1EF;border-color:#EEE1EF}'+
+  '.fbinfo{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.25rem;min-width:200px;color:var(--maroon,#481C4A)}'+
+  '.fbwrap.fs .fbinfo,.fbwrap.fs .fbhint{color:#EEE1EF}'+
+  '.fbhint{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.05rem;margin-top:12px;color:var(--ink,#221122)}'+
+  '.fbmodal{position:fixed;inset:0;z-index:9500;background:rgba(20,0,20,.95);overflow:auto;padding:64px 16px 40px}'+
+  '.fbmodal img{display:block;width:100%;max-width:980px;margin:0 auto 18px}'+
+  '.fbmodal .fbbtn{position:fixed;top:14px;right:16px}'+
+  '@media (prefers-reduced-motion:reduce){.fbleaf,.fbbook{transition:none}}';
+  var st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
+
+  var N=PAGES.length;
+  var v=document.createElement('div'); v.className='view'; v.id='v-archives';
+  v.innerHTML='<section style="padding-top:12px"><h2 class="section-title" style="text-align:center;margin-bottom:4px">Archives</h2>'+
+  '<p class="hand" style="text-align:center;font-size:1.3rem;margin-bottom:26px">'+TITLE+' · '+DATE+'</p>'+
+  '<div class="fbwrap" id="fbwrap"><div class="fbstage" id="fbstage"><div class="fbbook" id="fbbook"></div></div>'+
+  '<div class="fbbar"><button class="fbbtn" id="fbPrev" type="button">&#8249; Previous</button><span class="fbinfo" id="fbInfo"></span><button class="fbbtn" id="fbNext" type="button">Next &#8250;</button></div>'+
+  '<div class="fbbar" style="margin-top:14px"><button class="fbbtn alt" id="fbRead" type="button">Read this spread larger</button><button class="fbbtn alt" id="fbFull" type="button">Full screen</button></div>'+
+  '<p class="fbhint">Click, tap or swipe the pages to turn them. Arrow keys work too.</p></div></section>';
+  main.appendChild(v);
+
+  var wrap=v.querySelector('#fbwrap'),stage=v.querySelector('#fbstage'),book=v.querySelector('#fbbook'),
+      info=v.querySelector('#fbInfo'),prev=v.querySelector('#fbPrev'),next=v.querySelector('#fbNext');
+  var leaves=[],s=0,busy=false,ratio=650/830,maxS=Math.floor(N/2);
+  for(var i=0;i<N;i+=2){
+    var lf=document.createElement('div'); lf.className='fbleaf';
+    lf.innerHTML='<div class="fbface fbfr"><img src="'+PAGES[i]+'" alt="Page '+(i+1)+'" draggable="false"></div>'+
+      (PAGES[i+1]?'<div class="fbface fbbk"><img src="'+PAGES[i+1]+'" alt="Page '+(i+2)+'" draggable="false"></div>':'');
+    book.appendChild(lf); leaves.push(lf);
+  }
+  function render(moving){
+    leaves.forEach(function(lf,k){
+      lf.classList.toggle('flipped',k<s);
+      lf.style.zIndex=(k===moving)?100:(k<s?k+1:leaves.length-k);
+    });
+    book.style.transform=s===0?'translateX(-25%)':((N%2===0&&s===maxS)?'translateX(25%)':'none');
+    info.textContent=s===0?'Cover · page 1 of '+N:'Pages '+(2*s)+(2*s+1<=N?'–'+(2*s+1):'')+' of '+N;
+    prev.disabled=s===0; next.disabled=s===maxS;
+  }
+  function go(d){
+    var t=s+d; if(t<0||t>maxS||busy) return;
+    busy=true; var m=d>0?s:t; s=t; render(m);
+    setTimeout(function(){busy=false;render();},900);
+  }
+  function fit(){
+    var fs=wrap.classList.contains('fs');
+    var aw=fs?window.innerWidth-24:Math.min(wrap.clientWidth||800,1100);
+    var ah=fs?window.innerHeight-130:window.innerHeight*.85;
+    var h=Math.min(aw/(2*ratio),ah);
+    stage.style.width=(2*h*ratio)+'px'; stage.style.height=h+'px';
+  }
+  var probe=new Image(); probe.onload=function(){ratio=probe.naturalWidth/probe.naturalHeight;fit();}; probe.src=PAGES[0];
+  prev.onclick=function(){go(-1)}; next.onclick=function(){go(1)};
+  var x0=null;
+  stage.addEventListener('pointerdown',function(e){x0=e.clientX;});
+  stage.addEventListener('pointerup',function(e){
+    if(x0===null) return; var dx=e.clientX-x0; x0=null;
+    if(Math.abs(dx)>50) go(dx<0?1:-1);
+    else if(Math.abs(dx)<10){var r=stage.getBoundingClientRect(); go(e.clientX<r.left+r.width/2?-1:1);}
+  });
+  var modal=null;
+  function closeModal(){if(modal){modal.remove();modal=null;}}
+  v.querySelector('#fbRead').onclick=function(){
+    var idx=s===0?[0]:[2*s-1,2*s].filter(function(n){return n<N;});
+    modal=document.createElement('div'); modal.className='fbmodal';
+    modal.innerHTML='<button class="fbbtn" type="button">Close</button>'+idx.map(function(n){return '<img src="'+PAGES[n]+'" alt="Page '+(n+1)+'">';}).join('');
+    modal.querySelector('button').onclick=closeModal; document.body.appendChild(modal);
+  };
+  var fsBtn=v.querySelector('#fbFull');
+  function toggleFs(){wrap.classList.toggle('fs'); fsBtn.textContent=wrap.classList.contains('fs')?'Exit full screen':'Full screen'; fit();}
+  fsBtn.onclick=toggleFs;
+  document.addEventListener('keydown',function(e){
+    if(!v.classList.contains('active')) return;
+    if(e.key==='ArrowRight') go(1); else if(e.key==='ArrowLeft') go(-1);
+    else if(e.key==='Escape'){ if(modal) closeModal(); else if(wrap.classList.contains('fs')) toggleFs(); }
+  });
+  window.addEventListener('resize',fit);
+
+  var link=Array.prototype.filter.call(document.querySelectorAll('.nav a'),function(a){return /archives/i.test(a.textContent);})[0];
+  if(link) link.setAttribute('href','#archives');
+  function onHash(){
+    var on=location.hash==='#archives';
+    if(on) document.querySelectorAll('.view').forEach(function(x){x.classList.toggle('active',x===v);});
+    else v.classList.remove('active');
+    if(on) document.querySelectorAll('.nav a').forEach(function(a){a.classList.toggle('on',a===link);});
+    if(on){fit();window.scrollTo(0,0);}
+  }
+  window.addEventListener('hashchange',onHash);
+  render(); fit(); onHash();
+})();
+</script>
+</body>
+</html>
