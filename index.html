@@ -36,7 +36,7 @@ a:hover{color:#1D001E}
 .masthead .tagline{font-size:clamp(1rem,2.4vw,1.4rem);text-align:center;margin-top:6px}
 .double-rule{border-top:4px double var(--maroon);height:6px}
 
-/* Page views (Home / Team / Submit) */
+/* Page views (Home / Team / Submit / Archives) */
 .view{display:none}
 .view.active{display:block}
 .view>section:first-child{margin-top:0!important}
@@ -59,7 +59,6 @@ main{padding:40px 56px}
 .polaroid{--r:rotate(2.5deg);padding:16px 16px 30px;text-align:center}
 
 /* Editor sections */
-.note{margin-top:56px;display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:center;padding:34px}
 .note h2{font-size:clamp(2rem,4vw,2.75rem);margin:6px 0 14px}
 .letter{margin-top:56px;background:var(--maroon);color:var(--paper);padding:44px;display:grid;grid-template-columns:1fr 3fr;gap:36px;align-items:center}
 .letter h2{color:var(--paper);font-size:2.4rem}
@@ -82,13 +81,11 @@ footer a{color:var(--paper)}
 /* Tablet and phone */
 @media (max-width:860px){
   .masthead,main,footer{padding-left:24px;padding-right:24px}
-  .front,.grid3,.note,.letter{grid-template-columns:1fr}
+  .front,.grid3,.letter{grid-template-columns:1fr}
   .front{gap:32px}
   .polaroid{max-width:340px;margin:0 auto}
-  .note{padding:24px}
   .letter{padding:28px}
   .letter-art{max-width:160px;margin:0 auto}
-  .note .portrait{max-width:220px;margin:0 auto}
 }
 @media (max-width:560px){
   .masthead-row .fl-wrap{display:none}
@@ -104,7 +101,7 @@ footer a{color:var(--paper)}
 #introSkip{position:absolute;right:20px;bottom:20px;background:transparent;border:1px solid #EEE1EF;color:#EEE1EF;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;padding:6px 16px;border-radius:20px;cursor:pointer}
 #introSkip:hover{background:#EEE1EF;color:#1D001E}
 
-/* Formal details, deco, letter, team, form */
+/* Formal details, deco, signature, form */
 .page>*:not(.deco){position:relative;z-index:1}
 .deco{position:absolute;inset:0;pointer-events:none;z-index:0!important}
 .dd{position:absolute;color:var(--maroon);opacity:.5}
@@ -115,18 +112,7 @@ footer a{color:var(--paper)}
 @keyframes cross{to{left:calc(100% + 50px)}}
 .walker .wl{transform-origin:50% 0;transform-box:fill-box;animation:swing .6s ease-in-out infinite alternate}
 .walker .b{animation-direction:alternate-reverse}
-.letter-wrap{margin-top:56px;transform:rotate(-.6deg);filter:drop-shadow(0 10px 14px rgba(29,0,30,.35))}
-.letter-wrap{max-width:900px;margin-left:auto;margin-right:auto}
-.note.paper{position:relative;grid-template-columns:1fr;margin:0;border:0;animation:none;padding:60px 56px;background:linear-gradient(180deg,transparent calc(33.3% - 5px),rgba(70,30,72,.28) calc(33.3% - 1px),rgba(255,248,225,.55) calc(33.3% + 1px),rgba(70,30,72,.12) calc(33.3% + 5px),transparent calc(33.3% + 12px)),linear-gradient(180deg,transparent calc(66.6% - 5px),rgba(70,30,72,.28) calc(66.6% - 1px),rgba(255,248,225,.55) calc(66.6% + 1px),rgba(70,30,72,.12) calc(66.6% + 5px),transparent calc(66.6% + 12px)),linear-gradient(90deg,transparent calc(50% - 6px),rgba(70,30,72,.25) calc(50% - 1px),rgba(255,248,225,.5) calc(50% + 1px),transparent calc(50% + 8px)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .2 0 0 0 0 .08 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(ellipse 90px 60px at 96% 22%,rgba(25,0,26,.55),transparent 70%),radial-gradient(ellipse 120px 70px at 3% 78%,rgba(25,0,26,.5),transparent 70%),radial-gradient(ellipse 70px 50px at 62% 99%,rgba(25,0,26,.5),transparent 70%),radial-gradient(ellipse 80px 45px at 28% 1%,rgba(25,0,26,.45),transparent 70%),radial-gradient(circle at 20% 15%,#F2E7F3,#E8D8E9 60%,#D7C0D8);box-shadow:inset 0 0 70px rgba(45,10,46,.55),inset 0 0 22px rgba(15,0,16,.75),inset 0 0 4px rgba(0,0,0,.9);clip-path:polygon(0 2.5%,2% 1%,4% 2.6%,7% .4%,10% 1.8%,14% 0,18% 1.6%,23% .3%,27% 2%,33% 0,38% 1.4%,45% .2%,50% 1.8%,57% 0,63% 1.5%,69% .2%,74% 1.9%,80% 0,86% 1.4%,91% .3%,96% 1.6%,100% 0,99% 9%,100% 17%,98.6% 26%,100% 35%,99% 44%,100% 55%,98.7% 64%,100% 74%,99.2% 84%,100% calc(100% - 64px),calc(100% - 64px) 100%,92% 98.6%,86% 100%,78% 98.4%,70% 99.8%,62% 98.2%,54% 100%,46% 98.6%,38% 100%,30% 98.3%,22% 99.8%,14% 98.5%,8% 100%,3% 98.6%,0 100%,1.3% 91%,0 82%,1.2% 72%,0 62%,1.4% 52%,0 42%,1.2% 31%,0 20%,1.3% 11%)}
-.note.paper::after{content:'';position:absolute;right:0;bottom:0;width:64px;height:64px;background:linear-gradient(135deg,#F4EBF4 0%,#D8BFD9 46%,#834785 50%,transparent 50.5%);pointer-events:none}
 .sign{font-family:'Pinyon Script',cursive;font-size:2.4rem;line-height:1.2;color:var(--maroon-dark);margin-top:14px}
-.team{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.pass{padding:0;overflow:hidden;text-align:center;position:relative}
-.pass .band{background:var(--maroon);color:var(--paper);padding:10px;letter-spacing:.3em;font-size:.8rem}
-.pass .pbody{padding:24px 18px}
-.avatar{width:124px;height:124px;display:block;margin:0 auto 12px;border-radius:50%;border:3px solid var(--maroon)}
-.pass h3{font-size:1.9rem}
-.ini{font-size:.8rem;letter-spacing:.12em;margin-top:6px}
 .mini{position:absolute;right:-24px;top:34px;width:90px;height:90px;color:var(--maroon);opacity:.13}
 .sub{position:relative;overflow:hidden;padding:44px}
 .mini.big{width:240px;height:240px;right:-60px;top:-60px}
@@ -137,27 +123,82 @@ form textarea{resize:vertical}
 form button{background:var(--maroon);color:var(--paper);border:0;padding:13px 30px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.08em;cursor:pointer}
 form button:hover{background:var(--maroon-dark)}
 #subnote{margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--maroon)}
-@media (max-width:860px){.team,.fgrid{grid-template-columns:1fr}.dd:not(.spin){display:none}.note.paper{padding:40px 26px}.sub{padding:28px}}
+@media (max-width:860px){.fgrid{grid-template-columns:1fr}.dd:not(.spin){display:none}.sub{padding:28px}}
 
-/* Letter from the Editor: light folded paper */
+/* Light folded letter paper */
+.letter-wrap{margin-top:56px;max-width:900px;margin-left:auto;margin-right:auto}
 .letter-wrap.light{transform:rotate(.5deg);filter:drop-shadow(0 8px 12px rgba(29,0,30,.28))}
 .letter-wrap.light .letter{margin:0}
 .letter.sheet{position:relative;color:var(--ink);padding:56px;background:linear-gradient(180deg,transparent calc(33.3% - 5px),rgba(90,50,92,.16) calc(33.3% - 1px),rgba(255,252,240,.7) calc(33.3% + 1px),rgba(90,50,92,.07) calc(33.3% + 5px),transparent calc(33.3% + 12px)),linear-gradient(180deg,transparent calc(66.6% - 5px),rgba(90,50,92,.16) calc(66.6% - 1px),rgba(255,252,240,.7) calc(66.6% + 1px),rgba(90,50,92,.07) calc(66.6% + 5px),transparent calc(66.6% + 12px)),linear-gradient(90deg,transparent calc(50% - 6px),rgba(90,50,92,.15) calc(50% - 1px),rgba(255,252,240,.65) calc(50% + 1px),transparent calc(50% + 8px)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .12 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(circle at 80% 20%,#FAF5FA,#F2E7F3 65%,#E8D8E9);box-shadow:inset 0 0 36px rgba(120,80,122,.22),inset 0 0 3px rgba(90,50,92,.4);clip-path:polygon(0 .8%,3% 0,8% .7%,14% 0,21% .6%,29% 0,37% .7%,45% 0,53% .6%,61% 0,69% .7%,77% 0,85% .6%,92% 0,100% .7%,99.5% 12%,100% 25%,99.4% 38%,100% 52%,99.5% 66%,100% 80%,99.6% 92%,100% 100%,92% 99.3%,84% 100%,75% 99.4%,66% 100%,57% 99.3%,48% 100%,39% 99.4%,30% 100%,21% 99.3%,12% 100%,calc(0% + 64px) 100%,0 calc(100% - 64px),.5% 88%,0 74%,.6% 60%,0 46%,.5% 32%,0 18%)}
 .letter.sheet h2{color:var(--maroon-dark)}
 .letter.sheet .hand{color:var(--maroon)}
 .letter.sheet::after{content:'';position:absolute;left:0;bottom:0;width:64px;height:64px;background:linear-gradient(225deg,#FAF5FA 0%,#E2CFE3 46%,#A15CA3 50%,transparent 50.5%);pointer-events:none}
+.letter.eicl{grid-template-columns:1fr;text-align:left}
 @media (max-width:860px){.letter.sheet{padding:40px 26px}}
+
+/* Editor-in-Chief: an envelope that opens */
+.eic{margin:64px auto 0;max-width:900px;text-align:center}
+.eic-hint{font-size:1.25rem}
+.eic-stage{padding-top:0;transition:padding-top .9s ease;margin-top:14px}
+.eic.open .eic-stage{padding-top:150px}
+.eic-env{position:relative;width:min(540px,100%);aspect-ratio:2/1;margin:0 auto;cursor:pointer;filter:drop-shadow(0 10px 14px rgba(29,0,30,.3));-webkit-tap-highlight-color:transparent}
+.eic-back{position:absolute;inset:0;background:linear-gradient(160deg,#EBDDEC,#D9C1DA);border:1px solid var(--edge);z-index:1}
+.eic-paper{position:absolute;left:7%;right:7%;top:8%;height:86%;z-index:2;background:linear-gradient(180deg,#FBF7FB,#F2E7F3);border:1px solid var(--edge);padding:16px 20px;text-align:left;transition:transform 1s cubic-bezier(.3,.7,.2,1) .35s;box-shadow:0 -2px 8px rgba(29,0,30,.12)}
+.eic.open .eic-paper{transform:translateY(-52%)}
+.eic-paper .hand{font-size:1.15rem;line-height:1.2}
+.eic-paper .pl{display:block;height:1px;background:var(--edge);margin-top:14px}
+.eic-front,.eic-flap{position:absolute;left:0;width:100%;display:block}
+.eic-front{top:0;height:100%;z-index:3}
+.eic-flap{top:0;height:50%;z-index:5;transform-origin:50% 0;transform:perspective(900px) rotateX(0);transition:transform .8s ease,z-index 0s .4s}
+.eic.open .eic-flap{transform:perspective(900px) rotateX(180deg);z-index:1}
+.eic-seal{position:absolute;left:50%;top:50%;width:84px;height:84px;z-index:6;transform:translate(-50%,-50%);transition:opacity .4s ease,transform .6s ease;filter:drop-shadow(0 3px 4px rgba(29,0,30,.45))}
+.eic.open .eic-seal{opacity:0;transform:translate(-50%,-90%) scale(.5) rotate(-25deg);pointer-events:none}
+.eic-seal svg{width:100%;height:100%;display:block}
+.eic-body{max-height:0;overflow:hidden;opacity:0;padding:0 12px;transition:max-height 1.2s ease .6s,opacity .9s ease .8s}
+.eic.open .eic-body{max-height:1600px;opacity:1}
+.eic-body .letter-wrap{margin-top:22px;margin-bottom:12px}
 
 /* Meet the Team: letters */
 .pile{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 20px;margin:0 0 40px}
 .mini-env{width:96px;height:auto;filter:drop-shadow(0 4px 5px rgba(29,0,30,.3))}
 .env{position:relative;aspect-ratio:3/2;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .12 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(circle at 25% 20%,#F8F1F8,#F0E4F1 70%,#E4D2E5);border:1px solid var(--edge);box-shadow:0 8px 16px rgba(29,0,30,.25),inset 0 0 26px rgba(120,80,122,.2);transform:var(--r,none);animation:up .9s ease backwards;transition:transform .3s,box-shadow .3s}
 .env:hover{transform:rotate(0) translateY(-6px);box-shadow:0 14px 22px rgba(29,0,30,.3),inset 0 0 26px rgba(120,80,122,.2)}
-.env svg{display:block;width:100%;height:100%}
-.team{display:flex;flex-wrap:wrap;justify-content:center;gap:32px}
+.env>svg{display:block;width:100%;height:100%}
+.team{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:32px}
 .team .env{width:calc((100% - 64px)/3)}
-@media (max-width:860px){.team .env{width:100%;max-width:460px}}
-@media (max-width:860px){.mini-env{width:70px}}
+.team .env.pad{margin-top:70px}
+@media (max-width:860px){.team .env{width:100%;max-width:460px}.team .env.pad.kk{margin-top:0}.mini-env{width:70px}}
+
+/* Cats */
+.cat{position:relative;width:130px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cat svg{display:block;width:100%;height:auto;overflow:visible}
+.cat .tail{transform-box:fill-box;transform-origin:0% 100%;animation:tailsw 3s ease-in-out infinite}
+@keyframes tailsw{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(14deg)}}
+.cat .head{transform-box:fill-box;transform-origin:50% 100%;animation:tilt 6s ease-in-out infinite}
+@keyframes tilt{0%,100%{transform:rotate(0)}40%{transform:rotate(-3deg)}70%{transform:rotate(3deg)}}
+.cat .lids rect{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:blink 5s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
+.cat .mo{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0)}
+.cat.meowing .mo{animation:yap .32s ease-in-out 3}
+@keyframes yap{0%,100%{transform:scaleY(.1)}50%{transform:scaleY(1)}}
+.cat.meowing .head{animation:none;transform:translateY(-3px) rotate(-3deg)}
+.cat.knead .pl,.cat.knead .pr{animation:knead .9s ease-in-out infinite}
+.cat.knead .pr{animation-delay:.45s}
+@keyframes knead{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.cat .bub{position:absolute;left:50%;top:-30px;transform:translateX(-50%) scale(.6);opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;background:var(--paper-light);border:1px solid var(--maroon);border-radius:14px;padding:1px 12px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--maroon);pointer-events:none;z-index:4}
+.cat.say .bub{opacity:1;transform:translateX(-50%) scale(1)}
+.catrow{display:flex;justify-content:center;align-items:flex-end;gap:26px;margin-top:64px;padding-bottom:0;border-bottom:4px double var(--maroon)}
+.catrow .cat{width:150px;margin-bottom:-4px}
+.yarn{width:56px;height:56px;margin-bottom:2px;animation:rock 3.4s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes rock{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.cathint{text-align:center;font-size:1.15rem;margin-top:10px}
+.cat.kn{position:absolute;right:16px;top:-100px;width:104px;z-index:3}
+.perch{position:relative;margin-top:120px}
+.perch .cat{position:absolute;right:40px;bottom:calc(100% - 6px);width:120px;z-index:2}
+.cat.arch{position:absolute;right:2%;top:-6px;width:92px}
+@media (max-width:860px){.cat.arch{position:static;margin:0 auto 10px}.perch .cat{right:16px;width:100px}}
+#snd{position:fixed;right:14px;bottom:14px;z-index:800;background:var(--maroon);color:var(--paper);border:1px solid var(--gold);border-radius:20px;padding:6px 14px;font-family:'Cormorant Garamond',serif;font-size:1rem;cursor:pointer}
+#snd:hover{background:var(--maroon-dark)}
 </style>
 <noscript><style>#intro{display:none}</style></noscript>
 </head>
@@ -168,6 +209,7 @@ form button:hover{background:var(--maroon-dark)}
   <button id="introSkip" type="button">Skip</button>
 </div>
 <a class="skip" href="#top">Skip to content</a>
+<button id="snd" type="button" aria-pressed="true">Cat sounds: on</button>
 
 <!-- Shared paisley motif, reused with <use> -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -183,8 +225,13 @@ form button:hover{background:var(--maroon-dark)}
   <symbol id="diyad" viewBox="0 0 60 50"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 26Q30 56 54 26Z"/><path d="M30 24C24 16 28 10 30 3C32 10 36 16 30 24Z"/><circle cx="30" cy="36" r="2"/></g></symbol>
   <symbol id="jhumka" viewBox="0 0 30 60"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 0V9"/><path d="M5 24a10 13 0 0 1 20 0z"/><path d="M8 24V34M15 24V38M22 24V34"/><circle cx="8" cy="37" r="2.5"/><circle cx="15" cy="41" r="2.5"/><circle cx="22" cy="37" r="2.5"/></g></symbol>
   <symbol id="bangles" viewBox="0 0 60 60"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="26" cy="30" r="20"/><circle cx="34" cy="30" r="20"/><circle cx="30" cy="30" r="14" stroke-dasharray="2 3"/></g></symbol>
-  <symbol id="girl" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#E2CEE3"/><ellipse cx="50" cy="42" rx="24" ry="26" fill="#150016"/><path d="M12 100C12 76 30 66 50 66C70 66 88 76 88 100Z" fill="var(--k)"/><path d="M38 67Q50 80 62 67" fill="none" stroke="#E8B04C" stroke-width="2"/><rect x="45" y="58" width="10" height="11" fill="var(--s)"/><ellipse cx="50" cy="46" rx="15" ry="18" fill="var(--s)"/><path d="M30 50C26 14 74 14 70 50C68 34 60 25 50 24C40 25 32 34 30 50Z" fill="var(--d)"/><path d="M31 47C42 28 58 28 69 47" fill="none" stroke="#E8B04C" stroke-width="1.2"/><path d="M30 50C22 68 24 86 34 98L42 80C36 70 36 60 38 52Z" fill="var(--d)"/><path d="M70 50C78 68 76 86 66 98L58 80C64 70 64 60 62 52Z" fill="var(--d)"/><circle cx="31" cy="60" r="2" fill="#E8B04C"/><circle cx="69" cy="60" r="2" fill="#E8B04C"/></symbol>
-  <symbol id="f-rose" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50" cy="48" r="38" fill="#A02D42" stroke="#6B1420" stroke-width="1.5"/><circle cx="50" cy="48" r="29" fill="#C24560" stroke="#6B1420"/><circle cx="50" cy="48" r="20" fill="#D45F78" stroke="#6B1420"/><path d="M50 48m-11 0a11 11 0 1 1 11 11" fill="none" stroke="#6B1420" stroke-width="1.6"/><path d="M50 48m-5 0a5 5 0 1 1 5 5" fill="none" stroke="#6B1420" stroke-width="1.4"/><path d="M26 30Q38 40 30 56M74 30Q62 40 70 56" fill="none" stroke="#6B1420" stroke-width="1"/></symbol><symbol id="f-sunflower" viewBox="0 0 100 100"><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(0.0 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(25.7 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(51.4 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(77.1 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(102.9 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(128.6 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(154.3 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(180.0 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(205.7 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(231.4 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(257.1 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(282.9 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(308.6 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate(334.3 50 50)" fill="#F2B632" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(0.0 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(25.7 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(51.4 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(77.1 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(102.9 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(128.6 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(154.3 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(180.0 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(205.7 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(231.4 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(257.1 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(282.9 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(308.6 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate(334.3 50 50)" fill="#F7C84F" stroke="#B97A0E" stroke-width="1"/><circle cx="50" cy="50" r="17" fill="#5A3318" stroke="#150016" stroke-width="1.5"/><circle cx="59.0" cy="50.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="56.4" cy="56.4" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="50.0" cy="59.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="43.6" cy="56.4" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="41.0" cy="50.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="43.6" cy="43.6" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="50.0" cy="41.0" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="56.4" cy="43.6" r="2" fill="#8A5A30" stroke="#8A5A30" stroke-width="1"/><circle cx="50" cy="50" r="3" fill="#8A5A30"/></symbol><symbol id="f-lotus" viewBox="0 0 100 100"><g transform="translate(0 18)"><path d="M50 56C38 44 38 22 50 6 62 22 62 44 50 56Z" fill="#F4A6B8" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C32 52 22 34 24 18 40 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C68 52 78 34 76 18 60 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C26 58 8 46 4 34 22 32 40 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C74 58 92 46 96 34 78 32 60 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/></g><path d="M8 84Q50 74 92 84" fill="none" stroke="#5E7A3C" stroke-width="3" stroke-linecap="round"/></symbol><symbol id="f-tulip" viewBox="0 0 100 100"><path d="M50 96V58" stroke="#5E7A3C" stroke-width="4" stroke-linecap="round"/><path d="M50 90C30 88 22 70 24 56 38 62 48 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M50 90C70 88 78 70 76 56 62 62 52 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M30 24C26 44 34 60 50 64 42 50 38 36 30 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M70 24C74 44 66 60 50 64 58 50 62 36 70 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M50 10C36 24 34 52 50 64 66 52 64 24 50 10Z" fill="#E0524A" stroke="#6B1420"/></symbol><symbol id="f-jasmine" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50.0" cy="33.0" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="66.2" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="60.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="40.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="33.8" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="50" cy="50" r="9" fill="#F2D27A" stroke="#BFAA78"/><circle cx="50" cy="50" r="3.5" fill="#E8B04C"/></symbol><symbol id="f-marigold" viewBox="0 0 100 100"><circle cx="80.0" cy="50.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="76.0" cy="65.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="65.0" cy="76.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="80.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="35.0" cy="76.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="24.0" cy="65.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="20.0" cy="50.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="24.0" cy="35.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="35.0" cy="24.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="20.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="65.0" cy="24.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="76.0" cy="35.0" r="11" fill="#E8821E" stroke="#A9520C" stroke-width="1"/><circle cx="68.1" cy="55.9" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="61.2" cy="65.4" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="69.0" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="38.8" cy="65.4" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="31.9" cy="55.9" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="31.9" cy="44.1" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="38.8" cy="34.6" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="50.0" cy="31.0" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="61.2" cy="34.6" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="68.1" cy="44.1" r="10" fill="#F29A26" stroke="#A9520C" stroke-width="1"/><circle cx="59.0" cy="50.0" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="55.6" cy="57.0" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="48.0" cy="58.8" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="41.9" cy="53.9" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="41.9" cy="46.1" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="48.0" cy="41.2" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="55.6" cy="43.0" r="7" fill="#F7B73C" stroke="#A9520C" stroke-width="1"/><circle cx="50" cy="50" r="5" fill="#C96A12"/></symbol><symbol id="miniEnv" viewBox="0 0 120 80"><rect x="2" y="2" width="116" height="76" rx="3" fill="#F2E7F3" stroke="#481C4A" stroke-width="1.5"/><path d="M2 2L60 46 118 2" fill="none" stroke="#481C4A" stroke-width="1.5"/><path d="M2 78L46 38M118 78L74 38" fill="none" stroke="#481C4A" stroke-width="1" opacity=".55"/><circle cx="60" cy="46" r="9" fill="var(--c,#481C4A)"/><circle cx="60" cy="46" r="4.5" fill="none" stroke="#F5ECF5" stroke-width="1.2"/></symbol>
+  <symbol id="f-rose" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50" cy="48" r="38" fill="#A02D42" stroke="#6B1420" stroke-width="1.5"/><circle cx="50" cy="48" r="29" fill="#C24560" stroke="#6B1420"/><circle cx="50" cy="48" r="20" fill="#D45F78" stroke="#6B1420"/><path d="M50 48m-11 0a11 11 0 1 1 11 11" fill="none" stroke="#6B1420" stroke-width="1.6"/><path d="M50 48m-5 0a5 5 0 1 1 5 5" fill="none" stroke="#6B1420" stroke-width="1.4"/><path d="M26 30Q38 40 30 56M74 30Q62 40 70 56" fill="none" stroke="#6B1420" stroke-width="1"/></symbol>
+  <symbol id="f-sunflower" viewBox="0 0 100 100"></symbol>
+  <symbol id="f-marigold" viewBox="0 0 100 100"></symbol>
+  <symbol id="f-lotus" viewBox="0 0 100 100"><g transform="translate(0 18)"><path d="M50 56C38 44 38 22 50 6 62 22 62 44 50 56Z" fill="#F4A6B8" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C32 52 22 34 24 18 40 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C68 52 78 34 76 18 60 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C26 58 8 46 4 34 22 32 40 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C74 58 92 46 96 34 78 32 60 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/></g><path d="M8 84Q50 74 92 84" fill="none" stroke="#5E7A3C" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="f-tulip" viewBox="0 0 100 100"><path d="M50 96V58" stroke="#5E7A3C" stroke-width="4" stroke-linecap="round"/><path d="M50 90C30 88 22 70 24 56 38 62 48 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M50 90C70 88 78 70 76 56 62 62 52 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M30 24C26 44 34 60 50 64 42 50 38 36 30 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M70 24C74 44 66 60 50 64 58 50 62 36 70 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M50 10C36 24 34 52 50 64 66 52 64 24 50 10Z" fill="#E0524A" stroke="#6B1420"/></symbol>
+  <symbol id="f-jasmine" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50.0" cy="33.0" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="66.2" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="60.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="40.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="33.8" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="50" cy="50" r="9" fill="#F2D27A" stroke="#BFAA78"/><circle cx="50" cy="50" r="3.5" fill="#E8B04C"/></symbol>
+  <symbol id="miniEnv" viewBox="0 0 120 80"><rect x="2" y="2" width="116" height="76" rx="3" fill="#F2E7F3" stroke="#481C4A" stroke-width="1.5"/><path d="M2 2L60 46 118 2" fill="none" stroke="#481C4A" stroke-width="1.5"/><path d="M2 78L46 38M118 78L74 38" fill="none" stroke="#481C4A" stroke-width="1" opacity=".55"/><circle cx="60" cy="46" r="9" fill="var(--c,#481C4A)"/><circle cx="60" cy="46" r="4.5" fill="none" stroke="#F5ECF5" stroke-width="1.2"/></symbol>
   <pattern id="diamonds" width="36" height="18" patternUnits="userSpaceOnUse">
     <path d="M18 2L28 9 18 16 8 9Z" fill="none" stroke="#481C4A" stroke-width="1.2"/>
     <circle cx="18" cy="9" r="2" fill="#481C4A"/>
@@ -261,15 +308,38 @@ form button:hover{background:var(--maroon-dark)}
       </article>
     </section>
 
-    <!-- Editor-in-Chief's note -->
-    <div class="letter-wrap"><section class="card note paper" style="--r:none">
-      <div>
-        <p class="hand" style="font-size:1.4rem">From the Desk of the Editor-in-Chief</p>
-        <h2>Every voice deserves a page.</h2>
-        <p><span class="drop">W</span>elcome to the first issue of Message Gazette, a little corner where our voices are written down, passed along and kept. [Your note to readers goes here.]</p>
-        <p class="sign">[Name]</p><p class="hand" style="font-size:1.1rem">Editor-in-Chief</p>
+    <!-- Editor-in-Chief's envelope: opens to reveal her note -->
+    <div class="eic" id="eic">
+      <p class="hand eic-hint" aria-live="polite">Tap the envelope to open it</p>
+      <div class="eic-stage">
+        <div class="eic-env" role="button" tabindex="0" aria-expanded="false" aria-label="Envelope from the Editor-in-Chief. Press to open or close.">
+          <div class="eic-back"></div>
+          <div class="eic-paper"><p class="hand">From the Desk of the Editor-in-Chief</p><span class="pl"></span><span class="pl"></span><span class="pl"></span></div>
+          <svg class="eic-front" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+            <polygon points="0,0 200,100 400,0 400,200 0,200" fill="#F3E8F4"/>
+            <path d="M0 200L170 88M400 200L230 88" stroke="#C6A8C7" fill="none" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+            <path d="M0 0L200 100L400 0" stroke="#B592B7" fill="none" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            <rect x="0" y="0" width="400" height="200" fill="none" stroke="#C6A8C7" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <svg class="eic-flap" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
+            <polygon points="0,0 400,0 200,100" fill="#E6D3E7" stroke="#B592B7" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <div class="eic-seal" aria-hidden="true">
+            <svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="40" fill="#481C4A"/><circle cx="42" cy="42" r="36" fill="none" stroke="#E8B04C" stroke-width="1.4" stroke-dasharray="2 3"/><circle cx="42" cy="42" r="30" fill="#F8F1F8"/><use href="#f-rose" x="14" y="14" width="56" height="56"/></svg>
+          </div>
+        </div>
       </div>
-    </section></div>
+      <div class="eic-body">
+        <div class="letter-wrap light"><section class="letter sheet eicl">
+          <div>
+            <p class="hand" style="font-size:1.4rem">From the Desk of the Editor-in-Chief</p>
+            <h2 style="margin:6px 0 14px">Every voice deserves a page.</h2>
+            <p><span class="drop">W</span>elcome to the first issue of Message Gazette, a little corner where our voices are written down, passed along and kept. [Your note to readers goes here.]</p>
+            <p class="sign">Maira Sakhi</p><p class="hand" style="font-size:1.1rem">Editor-in-Chief</p>
+          </div>
+        </section></div>
+      </div>
+    </div>
 
     <!-- Letter from the Editor -->
     <div class="letter-wrap light">
@@ -289,16 +359,26 @@ form button:hover{background:var(--maroon-dark)}
     </section>
     </div>
 
+    <!-- The gazette cat -->
+    <div class="catrow">
+      <div class="cat" data-pose="sit"></div>
+      <svg class="yarn" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="32" r="22" fill="#87428A" stroke="#481C4A" stroke-width="1.5"/><path d="M12 26C26 36 36 22 50 34M10 36C24 46 38 32 52 42M18 16C30 26 42 16 48 24" fill="none" stroke="#C9A0CB" stroke-width="1.6"/><path d="M8 50C0 56 6 58 2 58" fill="none" stroke="#87428A" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <p class="hand cathint">psst… say hello to the gazette cat</p>
+
     </div>
     <div class="view" id="v-team">
-    <section id="team" style="margin-top:72px"><h2 class="section-title" style="text-align:center;margin-bottom:6px">Meet the Team</h2><p class="hand" style="text-align:center;font-size:1.3rem;margin-bottom:30px">The editors, writers and artists behind Message Gazette</p><div class="pile" aria-hidden="true"><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#481C4A;transform:rotate(-9deg);animation-delay:0.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#87428A;transform:rotate(6deg);animation-delay:0.4s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#E8B04C;transform:rotate(-4deg);animation-delay:0.8s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#1D001E;transform:rotate(10deg);animation-delay:1.2s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#682F6A;transform:rotate(-7deg);animation-delay:1.6s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#A15CA3;transform:rotate(5deg);animation-delay:2.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#5B285D;transform:rotate(-11deg);animation-delay:2.4s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#834785;transform:rotate(8deg);animation-delay:2.8s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#481C4A;transform:rotate(-5deg);animation-delay:3.2s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#8C488E;transform:rotate(9deg);animation-delay:3.6s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#682F6A;transform:rotate(-6deg);animation-delay:4.0s"><use href="#miniEnv"/></svg></div><div class="team"><article class="env" style="--r:rotate(-1.6deg);animation-delay:0.0s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Maira Sakhi, Editor-in-Chief"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-rose" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="103" lengthAdjust="spacingAndGlyphs">Maira Sakhi</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="105" lengthAdjust="spacingAndGlyphs">Editor-in-Chief</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-rose" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(1.2deg);animation-delay:0.1s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Fatima Hassan, Associate Editor"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-lotus" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="122" lengthAdjust="spacingAndGlyphs">Fatima Hassan</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="112" lengthAdjust="spacingAndGlyphs">Associate Editor</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-lotus" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(-0.8deg);animation-delay:0.2s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Romaisa Abu Bakr, Media Team"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-sunflower" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="145" lengthAdjust="spacingAndGlyphs">Romaisa Abu Bakr</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="70" lengthAdjust="spacingAndGlyphs">Media Team</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-sunflower" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(1.1deg);animation-delay:0.3s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Momina Salman, Media Team"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-tulip" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="122" lengthAdjust="spacingAndGlyphs">Momina Salman</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="70" lengthAdjust="spacingAndGlyphs">Media Team</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-tulip" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(-1.2deg);animation-delay:0.4s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Khadijah tul Kubra, Graphic Designer"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-jasmine" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="145" lengthAdjust="spacingAndGlyphs">Khadijah tul Kubra</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="112" lengthAdjust="spacingAndGlyphs">Graphic Designer</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-jasmine" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(0.7deg);animation-delay:0.5s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Ayesha Wastie, Graphic Designer"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-marigold" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="122" lengthAdjust="spacingAndGlyphs">Ayesha Wastie</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="112" lengthAdjust="spacingAndGlyphs">Graphic Designer</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-marigold" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(1.4deg);animation-delay:0.6s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Ayesha Usman, Social Media Coordinator"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-lotus" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="113" lengthAdjust="spacingAndGlyphs">Ayesha Usman</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="14" fill="#481C4A" textLength="140" lengthAdjust="spacingAndGlyphs">Social Media Coordinator</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-lotus" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(-1deg);animation-delay:0.7s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Dmiyah, Social Media Coordinator"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-rose" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="56" lengthAdjust="spacingAndGlyphs">Dmiyah</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="14" fill="#481C4A" textLength="140" lengthAdjust="spacingAndGlyphs">Social Media Coordinator</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-rose" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(0.9deg);animation-delay:0.8s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Israa Rehman, Journalist"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-sunflower" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="113" lengthAdjust="spacingAndGlyphs">Israa Rehman</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="70" lengthAdjust="spacingAndGlyphs">Journalist</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-sunflower" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(-1.3deg);animation-delay:0.9s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Kiswa Goraya, Journalist"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-tulip" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="113" lengthAdjust="spacingAndGlyphs">Kiswa Goraya</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="70" lengthAdjust="spacingAndGlyphs">Journalist</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-tulip" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article><article class="env" style="--r:rotate(1deg);animation-delay:1.0s"><svg viewBox="0 0 300 200" role="img" aria-label="Letter addressed to Anam Bilal, Web Developer"><rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/><use href="#f-jasmine" x="22" y="52" width="100" height="100"/><text x="140" y="104" font-family="'Pinyon Script',cursive" font-size="27" fill="#1D001E" textLength="94" lengthAdjust="spacingAndGlyphs">Anam Bilal</text><text x="142" y="128" font-family="'Cormorant Garamond',serif" font-style="italic" font-size="16" fill="#481C4A" textLength="91" lengthAdjust="spacingAndGlyphs">Web Developer</text><path d="M142 146H268M142 160H248" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/><rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/><use href="#f-jasmine" x="236" y="26" width="34" height="34"/><text x="253" y="70" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text><circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/><path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg></article></div></section>
+    <section id="team" style="margin-top:72px"><h2 class="section-title" style="text-align:center;margin-bottom:6px">Meet the Team</h2><p class="hand" style="text-align:center;font-size:1.3rem;margin-bottom:30px">The editors, writers and artists behind Message Gazette</p><div class="pile" aria-hidden="true"><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#481C4A;transform:rotate(-9deg);animation-delay:0.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#87428A;transform:rotate(6deg);animation-delay:0.4s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#E8B04C;transform:rotate(-4deg);animation-delay:0.8s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#1D001E;transform:rotate(10deg);animation-delay:1.2s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#682F6A;transform:rotate(-7deg);animation-delay:1.6s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#A15CA3;transform:rotate(5deg);animation-delay:2.0s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#5B285D;transform:rotate(-11deg);animation-delay:2.4s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#834785;transform:rotate(8deg);animation-delay:2.8s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#481C4A;transform:rotate(-5deg);animation-delay:3.2s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#8C488E;transform:rotate(9deg);animation-delay:3.6s"><use href="#miniEnv"/></svg><svg class="mini-env fl" viewBox="0 0 120 80" style="--c:#682F6A;transform:rotate(-6deg);animation-delay:4.0s"><use href="#miniEnv"/></svg></div><div class="team" id="teamGrid"></div></section>
     </div>
     <div class="view" id="v-submit">
-    <section id="submit" class="card sub" style="--r:none;margin-top:72px"><svg class="mini big" aria-hidden="true"><use href="#mandala"/></svg><p class="hand" style="font-size:1.3rem">Contributions Welcome</p><h2 style="font-size:clamp(2rem,4vw,2.8rem);margin:4px 0 8px">Submit Your Work</h2><p style="margin-bottom:22px">Paste your article, poem or story below. It will be delivered directly to the editors’ inbox for review.</p>
+    <div class="perch">
+    <div class="cat" data-pose="sit"></div>
+    <section id="submit" class="card sub" style="--r:none"><svg class="mini big" aria-hidden="true"><use href="#mandala"/></svg><p class="hand" style="font-size:1.3rem">Contributions Welcome</p><h2 style="font-size:clamp(2rem,4vw,2.8rem);margin:4px 0 8px">Submit Your Work</h2><p style="margin-bottom:22px">Paste your article, poem or story below. It will be delivered directly to the editors’ inbox for review.</p>
       <form id="subform" action="https://formsubmit.co/YOUR-EMAIL@example.com" method="POST"><input type="hidden" name="_subject" value="New submission: Message Gazette"><input type="hidden" name="_captcha" value="false"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="fgrid"><label>Full name<input name="name" required></label><label>Class and section<input name="class" required></label><label>Email (optional)<input type="email" name="email"></label><label>Category<select name="category"><option>School News</option><option>Spotlight</option><option>Opinions and Essays</option><option>Creative Corner</option></select></label></div>
         <label>Title<input name="title" required></label><label>Your work (paste it here)<textarea name="submission" rows="10" required></textarea></label>
         <button type="submit">Send to the Editors</button><p id="subnote" role="status"></p></form></section>
+    </div>
     </div>
   </main>
 
@@ -359,6 +439,84 @@ form button:hover{background:var(--maroon-dark)}
 })();
 </script>
 <script>
+/* Flowers (sunflower, marigold) + Meet the Team letters.
+   To change a note, edit the last item of its row in MEMBERS. Empty note = a dashed line. */
+(function(){
+  function ring(n,fn){var s='';for(var i=0;i<n;i++)s+=fn(i*360/n);return s;}
+  document.getElementById('f-sunflower').innerHTML=
+    ring(14,function(a){return '<ellipse cx="50" cy="22" rx="7" ry="19" transform="rotate('+a+' 50 50)" fill="#F2B632" stroke="#B97A0E"/>';})+
+    ring(14,function(a){return '<ellipse cx="50" cy="28" rx="5.5" ry="13" transform="rotate('+a+' 50 50)" fill="#F7C84F" stroke="#B97A0E"/>';})+
+    '<circle cx="50" cy="50" r="17" fill="#5A3318" stroke="#150016" stroke-width="1.5"/>'+
+    ring(8,function(a){return '<circle cx="59" cy="50" r="2" transform="rotate('+a+' 50 50)" fill="#8A5A30"/>';})+
+    '<circle cx="50" cy="50" r="3" fill="#8A5A30"/>';
+  document.getElementById('f-marigold').innerHTML=
+    ring(12,function(a){return '<circle cx="80" cy="50" r="11" transform="rotate('+a+' 50 50)" fill="#E8821E" stroke="#A9520C"/>';})+
+    ring(10,function(a){return '<circle cx="69" cy="50" r="10" transform="rotate('+a+' 50 50)" fill="#F29A26" stroke="#A9520C"/>';})+
+    ring(7,function(a){return '<circle cx="59" cy="50" r="7" transform="rotate('+a+' 50 50)" fill="#F7B73C" stroke="#A9520C"/>';})+
+    '<circle cx="50" cy="50" r="5" fill="#C96A12"/>';
+
+  var MEMBERS=[
+    ['Maira Sakhi','Editor-in-Chief','rose',103,105,16,''],
+    ['Fatima Hassan','Associate Editor','lotus',122,112,16,''],
+    ['Romaisa Abu Bakr','Media Team','sunflower',145,70,16,'Fueled by coke and photography'],
+    ['Momina Salman','Media Team','tulip',122,70,16,'u gotta do what u gotta do'],
+    ['Khadijah tul Kubra','Graphic Designer','jasmine',145,112,16,''],
+    ['Ayesha Wastie','Graphic Designer','marigold',122,112,16,'The patriarchy will make you believe, a man did this'],
+    ['Aisha Usmaan','Social Media Coordinator','lotus',113,140,14,'Only cbtl could\u2019ve gotten me till here'],
+    ['Dmiyah','Social Media Coordinator','rose',56,140,14,'redbull gave me wings'],
+    ['Israa Rehman','Journalist','sunflower',113,70,16,'And they said humanity stopped making wonders?'],
+    ['Kiswa Goraya','Journalist','tulip',113,70,16,'Live life putting Shakespeare to shame \u2661'],
+    ['Anam Bilal','Web Developer','jasmine',94,91,16,'teach my art how to glow']
+  ];
+  var ROT=[-1.6,1.2,-.8,1.1,-1.2,.7,1.4,-1,.9,-1.3,1];
+  function wrap(t,max){var w=t.split(' '),l=[],c='';w.forEach(function(x){var n=(c?c+' ':'')+x;if(n.length>max&&c){l.push(c);c=x;}else c=n;});if(c)l.push(c);return l;}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+  var grid=document.getElementById('teamGrid');
+  MEMBERS.forEach(function(m,i){
+    var note=m[6]||'---------------', lines=wrap(note,26), txt='';
+    lines.slice(0,3).forEach(function(L,k){
+      var est=L.length*4.7, tl=est>127?' textLength="127" lengthAdjust="spacingAndGlyphs"':'';
+      txt+='<text x="143" y="'+(143.5+14*k)+'" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11" fill="#2B1A2B"'+tl+'>'+esc(L)+'</text>';
+    });
+    var f='#f-'+m[2];
+    var svg='<svg viewBox="0 0 300 200" role="img" aria-label="'+esc('Letter addressed to '+m[0]+', '+m[1]+(m[6]?'. Note: '+m[6]:''))+'">'+
+      '<rect x="12" y="12" width="276" height="176" rx="2" fill="none" stroke="#481C4A" stroke-width="1" stroke-dasharray="6 4" opacity=".4"/>'+
+      '<use href="'+f+'" x="22" y="52" width="100" height="100"/>'+
+      '<text x="140" y="104" font-family="Pinyon Script, cursive" font-size="27" fill="#1D001E" textLength="'+m[3]+'" lengthAdjust="spacingAndGlyphs">'+esc(m[0])+'</text>'+
+      '<text x="142" y="128" font-family="Cormorant Garamond, serif" font-style="italic" font-size="'+m[5]+'" fill="#481C4A" textLength="'+m[4]+'" lengthAdjust="spacingAndGlyphs">'+esc(m[1])+'</text>'+
+      '<path d="M142 146H270M142 160H270M142 174H270" stroke="#2B1A2B" stroke-width=".8" opacity=".3"/>'+txt+
+      '<rect x="230" y="20" width="46" height="56" fill="#F4EBF4" stroke="#481C4A" stroke-width="1.4" stroke-dasharray="3 2"/>'+
+      '<use href="'+f+'" x="236" y="26" width="34" height="34"/>'+
+      '<text x="253" y="70" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="7" letter-spacing="1" fill="#481C4A">GAZETTE</text>'+
+      '<circle cx="200" cy="46" r="20" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/>'+
+      '<path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#481C4A" stroke-width=".8" opacity=".5"/></svg>';
+    var a=document.createElement('article');
+    a.className='env'+(i===9?' pad kk':'')+(i===10?' pad':'');
+    a.style.setProperty('--r','rotate('+ROT[i]+'deg)');
+    a.style.animationDelay=(i*0.1)+'s';
+    a.innerHTML=svg;
+    if(m[0]==='Anam Bilal'){var c=document.createElement('div');c.className='cat kn';c.setAttribute('data-pose','knead');a.appendChild(c);}
+    grid.appendChild(a);
+  });
+})();
+</script>
+<script>
+/* Editor-in-Chief envelope: click / Enter to open or close; opens by itself the first time it scrolls into view */
+(function(){
+  var e=document.getElementById('eic'); if(!e) return;
+  var b=e.querySelector('.eic-env'),h=e.querySelector('.eic-hint'),touched=false;
+  function set(o){e.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');h.textContent=o?'Tap the envelope to close it':'Tap the envelope to open it';}
+  b.addEventListener('click',function(){touched=true;set(!e.classList.contains('open'));});
+  b.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();touched=true;set(!e.classList.contains('open'));}});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){
+      if(x.isIntersecting&&!touched){touched=true;setTimeout(function(){set(true);},700);io.disconnect();}
+    });},{threshold:.7});
+    io.observe(b);
+  }
+})();
+</script>
+<script>
 /* Archives: five flipbooks. Page images are named page-01.png, page-02.png ... and the numbering
    continues from one edition to the next. Edit BOOKS to change the dates or add more editions.
    Each edition holds up to "count" pages; any that are missing are skipped automatically. */
@@ -409,7 +567,7 @@ form button:hover{background:var(--maroon-dark)}
   function srcs(c){var a=[];for(var i=0;i<c.count;i++)a.push('page-'+pad(c.start+i)+'.png');return a;}
 
   var v=document.createElement('div'); v.className='view'; v.id='v-archives';
-  v.innerHTML='<section style="padding-top:12px"><h2 class="section-title" style="text-align:center;margin-bottom:4px">Archives</h2>'+
+  v.innerHTML='<section style="padding-top:12px;position:relative"><div class="cat arch" data-pose="sit"></div><h2 class="section-title" style="text-align:center;margin-bottom:4px">Archives</h2>'+
     '<p class="hand" style="text-align:center;font-size:1.3rem;margin-bottom:22px">Every edition of the Message Gazette</p>'+
     '<div class="fbtabs"></div><div class="fbsecs"></div></section>';
   main.appendChild(v);
@@ -528,6 +686,97 @@ form button:hover{background:var(--maroon-dark)}
   }
   window.addEventListener('hashchange',onHash);
   onHash();
+})();
+</script>
+<script>
+/* The gazette cats: drawn here, they meow (synthesised, no sound files) when you scroll to them or click them.
+   Cats live on every page: home (bottom), team (kneading on Anam Bilal's letter), submit (on the form), archives (top).
+   Remove the whole <script> block and the "Cat sounds" button to remove them. */
+(function(){
+  var CAT='<svg viewBox="0 0 160 172" aria-hidden="true">'+
+    '<g class="tail"><path d="M120 152C152 152 160 122 147 100" fill="none" stroke="#17121a" stroke-width="12" stroke-linecap="round"/><circle cx="147" cy="101" r="6.5" fill="#fff"/></g>'+
+    '<ellipse cx="80" cy="124" rx="42" ry="44" fill="#17121a"/><ellipse cx="80" cy="132" rx="19" ry="30" fill="#fff"/>'+
+    '<ellipse cx="50" cy="152" rx="17" ry="14" fill="#17121a"/><ellipse cx="110" cy="152" rx="17" ry="14" fill="#17121a"/>'+
+    '<g class="pl"><rect x="63" y="118" width="13" height="42" rx="6.5" fill="#17121a"/><ellipse cx="69.5" cy="160" rx="9" ry="6" fill="#fff"/></g>'+
+    '<g class="pr"><rect x="84" y="118" width="13" height="42" rx="6.5" fill="#17121a"/><ellipse cx="90.5" cy="160" rx="9" ry="6" fill="#fff"/></g>'+
+    '<g class="head">'+
+      '<path d="M48 52L44 16L76 38Z" fill="#17121a"/><path d="M112 52L116 16L84 38Z" fill="#17121a"/>'+
+      '<path d="M52 44L50 26L66 38Z" fill="#E7A0B4"/><path d="M108 44L110 26L94 38Z" fill="#E7A0B4"/>'+
+      '<ellipse cx="80" cy="70" rx="37" ry="31" fill="#17121a"/>'+
+      '<path d="M75 40L85 40L89 70L71 70Z" fill="#fff"/><ellipse cx="80" cy="85" rx="19" ry="14" fill="#fff"/>'+
+      '<ellipse cx="63" cy="64" rx="7" ry="7.5" fill="#C9DB4A"/><ellipse cx="97" cy="64" rx="7" ry="7.5" fill="#C9DB4A"/>'+
+      '<ellipse cx="63" cy="64" rx="2" ry="5.5" fill="#17121a"/><ellipse cx="97" cy="64" rx="2" ry="5.5" fill="#17121a"/>'+
+      '<g class="lids"><rect x="55" y="55" width="16" height="18" fill="#17121a"/><rect x="89" y="55" width="16" height="18" fill="#17121a"/></g>'+
+      '<path d="M75.5 79h9l-4.5 5z" fill="#E7849C"/>'+
+      '<ellipse class="mo" cx="80" cy="90" rx="5" ry="5.5" fill="#7A1E3A"/>'+
+      '<path d="M80 84v3M80 87q-4 4-8 1M80 87q4 4 8 1" stroke="#17121a" fill="none" stroke-width="1.3" stroke-linecap="round"/>'+
+      '<path d="M62 84L30 78M62 88L30 91M98 84L130 78M98 88L130 91" stroke="#7d6a85" stroke-width="1" fill="none"/>'+
+    '</g></svg>';
+
+  var AC=null,soundOn=true;
+  function ctx(){
+    if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){AC=null;}}
+    if(AC&&AC.state==='suspended'){try{AC.resume();}catch(e){}}
+    return AC;
+  }
+  document.addEventListener('pointerdown',function(){ctx();},{once:true});
+  document.addEventListener('keydown',function(){ctx();},{once:true});
+  function meow(){
+    if(!soundOn)return; var c=ctx(); if(!c||c.state!=='running')return;
+    var t=c.currentTime,d=.8,o=c.createOscillator(); o.type='sawtooth';
+    o.frequency.setValueAtTime(430,t);
+    o.frequency.linearRampToValueAtTime(840,t+.2);
+    o.frequency.linearRampToValueAtTime(720,t+.5);
+    o.frequency.exponentialRampToValueAtTime(380,t+d);
+    var f=c.createBiquadFilter(); f.type='bandpass'; f.Q.value=4;
+    f.frequency.setValueAtTime(750,t); f.frequency.linearRampToValueAtTime(1600,t+.28); f.frequency.linearRampToValueAtTime(950,t+d);
+    var g=c.createGain();
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(1,t+.09);
+    g.gain.exponentialRampToValueAtTime(.55,t+.45); g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    o.connect(f); f.connect(g); g.connect(c.destination); o.start(t); o.stop(t+d+.05);
+  }
+  function purr(){
+    if(!soundOn)return; var c=ctx(); if(!c||c.state!=='running')return;
+    var t=c.currentTime,d=2,len=Math.floor(c.sampleRate*d),buf=c.createBuffer(1,len,c.sampleRate),data=buf.getChannelData(0);
+    for(var i=0;i<len;i++)data[i]=Math.random()*2-1;
+    var src=c.createBufferSource(); src.buffer=buf;
+    var lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=260;
+    var g=c.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.linearRampToValueAtTime(.35,t+.3); g.gain.linearRampToValueAtTime(.0001,t+d);
+    var lfo=c.createOscillator(); lfo.frequency.value=25; var lg=c.createGain(); lg.gain.value=.25;
+    lfo.connect(lg); lg.connect(g.gain);
+    src.connect(lp); lp.connect(g); g.connect(c.destination); src.start(t); lfo.start(t); src.stop(t+d); lfo.stop(t+d);
+  }
+  var WORDS=['meow~','mrrow?','meeow!','mew mew'];
+  function speak(el){
+    var k=el.classList.contains('knead'),bub=el.querySelector('.bub');
+    bub.textContent=k?'purr purr \u2661':WORDS[Math.floor(Math.random()*WORDS.length)];
+    el.classList.add('say'); if(!k)el.classList.add('meowing');
+    if(k)purr(); else meow();
+    clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove('say','meowing');},1700);
+  }
+  var cats=document.querySelectorAll('.cat');
+  Array.prototype.forEach.call(cats,function(el){
+    if(el.getAttribute('data-pose')==='knead')el.classList.add('knead');
+    el.innerHTML=CAT+'<span class="bub" aria-hidden="true"></span>';
+    el.setAttribute('role','button'); el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label','Black and white cat. Press to hear it '+(el.classList.contains('knead')?'purr':'meow')+'.');
+    el.addEventListener('click',function(){speak(el);});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();speak(el);}});
+  });
+  if('IntersectionObserver' in window){
+    var seen=new WeakMap();
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){
+      var el=x.target;
+      if(x.isIntersecting&&!seen.get(el)){seen.set(el,true);setTimeout(function(){speak(el);},350);}
+      else if(!x.isIntersecting){seen.set(el,false);}
+    });},{threshold:.6});
+    Array.prototype.forEach.call(cats,function(el){io.observe(el);});
+  }
+  var btn=document.getElementById('snd');
+  btn.addEventListener('click',function(){
+    soundOn=!soundOn; btn.textContent='Cat sounds: '+(soundOn?'on':'off'); btn.setAttribute('aria-pressed',soundOn?'true':'false');
+    if(soundOn){ctx();}
+  });
 })();
 </script>
 </body>
