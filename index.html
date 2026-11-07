@@ -234,6 +234,7 @@ form button:hover{background:var(--maroon-dark)}
 .perch{position:relative;margin-top:120px}
 .perch .cat{position:absolute;right:40px;bottom:calc(100% - 6px);width:120px;z-index:2}
 .cat.arch{position:absolute;right:2%;top:-6px;width:92px}
+.cat.jumper{position:fixed;left:0;top:0;width:92px;z-index:60;display:none;will-change:transform}
 @media (max-width:860px){.cat.arch{position:static;margin:0 auto 10px}.perch .cat{right:16px;width:100px}}
 #snd{position:fixed;right:14px;bottom:14px;z-index:800;background:var(--maroon);color:var(--gold);border:1px solid var(--gold);border-radius:20px;padding:6px 14px;font-family:'Cormorant Garamond',serif;font-size:1rem;cursor:pointer}
 #snd:hover{background:var(--maroon-dark)}
@@ -272,6 +273,7 @@ form button:hover{background:var(--maroon-dark)}
   <symbol id="f-sakura" viewBox="0 0 100 100"></symbol>
   <symbol id="f-lavender" viewBox="0 0 100 100"></symbol>
   <symbol id="f-dahlia" viewBox="0 0 100 100"></symbol>
+  <symbol id="f-hibiscus" viewBox="0 0 100 100"></symbol>
   <symbol id="f-lotus" viewBox="0 0 100 100"><g transform="translate(0 18)"><path d="M50 56C38 44 38 22 50 6 62 22 62 44 50 56Z" fill="#F4A6B8" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C32 52 22 34 24 18 40 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C68 52 78 34 76 18 60 24 50 38 50 56Z" fill="#EE8AA1" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C26 58 8 46 4 34 22 32 40 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/><path d="M50 56C74 58 92 46 96 34 78 32 60 40 50 56Z" fill="#E4708E" stroke="#A33A58" stroke-width="1.6"/></g><path d="M8 84Q50 74 92 84" fill="none" stroke="#5E7A3C" stroke-width="3" stroke-linecap="round"/></symbol>
   <symbol id="f-tulip" viewBox="0 0 100 100"><path d="M50 96V58" stroke="#5E7A3C" stroke-width="4" stroke-linecap="round"/><path d="M50 90C30 88 22 70 24 56 38 62 48 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M50 90C70 88 78 70 76 56 62 62 52 74 50 90Z" fill="#6E8C48" stroke="#3E5526"/><path d="M30 24C26 44 34 60 50 64 42 50 38 36 30 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M70 24C74 44 66 60 50 64 58 50 62 36 70 24Z" fill="#B8322E" stroke="#6B1420"/><path d="M50 10C36 24 34 52 50 64 66 52 64 24 50 10Z" fill="#E0524A" stroke="#6B1420"/></symbol>
   <symbol id="f-jasmine" viewBox="0 0 100 100"><ellipse cx="22" cy="78" rx="16" ry="7" transform="rotate(-35 22 78)" fill="#5E7A3C" stroke="#3E5526"/><ellipse cx="78" cy="78" rx="16" ry="7" transform="rotate(35 78 78)" fill="#5E7A3C" stroke="#3E5526"/><circle cx="50.0" cy="33.0" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="66.2" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="60.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="40.0" cy="63.8" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="33.8" cy="44.7" r="13" fill="#FFFDF4" stroke="#BFAA78" stroke-width="1"/><circle cx="50" cy="50" r="9" fill="#F2D27A" stroke="#BFAA78"/><circle cx="50" cy="50" r="3.5" fill="#E8B04C"/></symbol>
@@ -346,12 +348,12 @@ form button:hover{background:var(--maroon-dark)}
       <article class="card" style="--r:rotate(-1.2deg)">
         <div class="row"><p class="hand" style="font-size:1.1rem">School News</p><svg class="fl" width="22" height="30" style="color:var(--maroon)" aria-hidden="true"><use href="#paisley"/></svg></div>
         <h3>The Season’s First Whispers</h3>
-        <p style="font-size:.95rem">[A short taste of the article, in a warm, storybook voice.]</p>
+        <p style="font-size:.95rem">“The canteen fries, are why our students come to school”</p>
       </article>
       <article class="card" style="--r:rotate(.8deg)">
         <div class="row"><p class="hand" style="font-size:1.1rem">Spotlight</p><svg class="fl" width="22" height="30" style="color:var(--maroon)" aria-hidden="true"><use href="#paisley"/></svg></div>
         <h3>Threads and Thistles</h3>
-        <p style="font-size:.95rem">[A student achievement or interview, in a line or two.]</p>
+        <p style="font-size:.95rem">“Miss Mahwish washroom joe?” ~Miss Zainab Masood</p>
       </article>
       <article class="card" style="--r:rotate(-.6deg)">
         <div class="row"><p class="hand" style="font-size:1.1rem">Creative Corner</p><svg class="fl" width="22" height="30" style="color:var(--maroon)" aria-hidden="true"><use href="#paisley"/></svg></div>
@@ -407,8 +409,8 @@ form button:hover{background:var(--maroon-dark)}
       <div>
         <h2>Letter from the Associate Editor</h2>
         <p style="margin-top:10px">Dear readers, this gazette is stitched from our stories, one thread at a time. [Associate Editor’s letter goes here.]</p>
-        <p class="hand" style="margin-top:10px;font-size:1.3rem">I lost my liver privileges</p>
-        <p class="sign">Fatima Hassan</p><p class="hand" style="font-size:1.1rem">Associate Editor</p>
+        <p class="hand" style="margin-top:10px;font-size:1.3rem">All stories deserve to be shared and why wouldn’t that include yours to? So tell us your stories however or whenever that may be :3</p>
+        <p class="sign">Syeda Fatima Hassan</p><p class="hand" style="font-size:1.1rem">Associate Editor</p>
       </div>
     </section>
     </div>
@@ -549,28 +551,33 @@ form button:hover{background:var(--maroon-dark)}
     ring(12,function(a){return '<ellipse cx="50" cy="34" rx="4.4" ry="9" transform="rotate('+a+' 50 50)" fill="#F08AA3" stroke="#7A1738"/>';})+
     '<circle cx="50" cy="50" r="6" fill="#E8B04C" stroke="#B97A0E"/>');
 
+  set('f-hibiscus',
+    ring(5,function(a){return '<ellipse cx="50" cy="27" rx="17" ry="24" transform="rotate('+a+' 50 50)" fill="#E8553E" stroke="#8A2415" stroke-width="1.3"/>';})+
+    '<circle cx="50" cy="50" r="9" fill="#9E1B1B"/><path d="M50 50L58 22" stroke="#E8B04C" stroke-width="2.4" stroke-linecap="round"/><circle cx="58" cy="21" r="2.2" fill="#E8B04C"/><circle cx="54" cy="25" r="1.8" fill="#E8B04C"/><circle cx="62" cy="26" r="1.8" fill="#E8B04C"/>');
+
   var MEMBERS=[
     ['Maira Sakhi','Editor-in-Chief','rose',103,105,16,'\u201CLiterature is the most agreeable way of ignoring life.\u201D \u2014Fernando Pessoa'],
-    ['Fatima Hassan','Associate Editor','lotus',122,112,16,'\u201CI am no bird; and no net ensnares me.\u201D \u2014Bront\u00EB'],
+    ['Syeda Fatima Hassan','Associate Editor','lotus',138,112,16,'All stories deserve to be shared and why wouldn\u2019t that include yours to? So tell us your stories however or whenever that may be :3'],
     ['Romaisa Abu Bakr','Media Team','sunflower',145,70,16,'Fueled by coke and photography'],
     ['Momina Salman','Media Team','tulip',122,70,16,'u gotta do what u gotta do'],
     ['Khadijah tul Kubra','Graphic Designer','jasmine',145,112,16,'\u201CNot all those who wander are lost.\u201D \u2014Tolkien'],
     ['Ayesha Wastie','Graphic Designer','marigold',122,112,16,'The patriarchy will make you believe, a man did this'],
     ['Aisha Usmaan','Social Media Coordinator','daisy',113,140,14,'Only cbtl could\u2019ve gotten me till here'],
     ['Dmiyah','Social Media Coordinator','poppy',56,140,14,'redbull gave me wings'],
+    ['Zaria Fatima','Social Media Coordinator','hibiscus',100,140,14,'Where stories meet the feed'],
     ['Israa Rehman','Journalist','sakura',113,70,16,'And they said humanity stopped making wonders?'],
     ['Kiswa Goraya','Journalist','lavender',113,70,16,'Live life putting Shakespeare to shame \u2661'],
     ['Anam Bilal','Web Developer','dahlia',94,91,16,'teach my art how to glow']
   ];
-  var ROT=[-1.6,1.2,-.8,1.1,-1.2,.7,1.4,-1,.9,-1.3,1];
+  var ROT=[-1.6,1.2,-.8,1.1,-1.2,.7,1.4,-1,.8,.9,-1.3,1];
   function wrap(t,max){var w=t.split(' '),l=[],c='';w.forEach(function(x){var n=(c?c+' ':'')+x;if(n.length>max&&c){l.push(c);c=x;}else c=n;});if(c)l.push(c);return l;}
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
   var grid=document.getElementById('teamGrid');
   MEMBERS.forEach(function(m,i){
-    var note=m[6]||'---------------', lines=wrap(note,26), txt='';
-    lines.slice(0,3).forEach(function(L,k){
-      var est=L.length*4.7, tl=est>127?' textLength="127" lengthAdjust="spacingAndGlyphs"':'';
-      txt+='<text x="143" y="'+(143.5+14*k)+'" font-family="Cormorant Garamond, serif" font-style="italic" font-size="11" fill="#150506"'+tl+'>'+esc(L)+'</text>';
+    var note=m[6]||'---------------', long=note.length>78, lines=wrap(note,long?38:26), txt='', fs=long?8:11, step=long?10:14, y0=long?141:143.5;
+    lines=lines.slice(0,long?5:3); lines.forEach(function(L,k){
+      var est=L.length*(long?3.4:4.7), tl=est>127?' textLength="127" lengthAdjust="spacingAndGlyphs"':'';
+      txt+='<text x="143" y="'+(y0+step*k)+'" font-family="Cormorant Garamond, serif" font-style="italic" font-size="'+fs+'" fill="#150506"'+tl+'>'+esc(L)+'</text>';
     });
     var f='#f-'+m[2];
     var svg='<svg viewBox="0 0 300 200" role="img" aria-label="'+esc('Letter addressed to '+m[0]+', '+m[1]+(m[6]?'. Note: '+m[6]:''))+'">'+
@@ -578,14 +585,14 @@ form button:hover{background:var(--maroon-dark)}
       '<use href="'+f+'" x="22" y="52" width="100" height="100"/>'+
       '<text x="140" y="104" font-family="Pinyon Script, cursive" font-size="27" fill="#1A0507" textLength="'+m[3]+'" lengthAdjust="spacingAndGlyphs">'+esc(m[0])+'</text>'+
       '<text x="142" y="128" font-family="Cormorant Garamond, serif" font-style="italic" font-size="'+m[5]+'" fill="#7A1523" textLength="'+m[4]+'" lengthAdjust="spacingAndGlyphs">'+esc(m[1])+'</text>'+
-      '<path d="M142 146H270M142 160H270M142 174H270" stroke="#150506" stroke-width=".8" opacity=".3"/>'+txt+
+      '<path d="'+(long?lines.map(function(L,k){return 'M142 '+(y0+step*k+2.5)+'H270';}).join(''):'M142 146H270M142 160H270M142 174H270')+'" stroke="#150506" stroke-width=".8" opacity=".3"/>'+txt+
       '<rect x="230" y="20" width="46" height="56" fill="#F8EAE6" stroke="#7A1523" stroke-width="1.4" stroke-dasharray="3 2"/>'+
       '<use href="'+f+'" x="236" y="26" width="34" height="34"/>'+
       '<text x="253" y="70" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="7" letter-spacing="1" fill="#7A1523">GAZETTE</text>'+
       '<circle cx="200" cy="46" r="20" fill="none" stroke="#7A1523" stroke-width=".8" opacity=".5"/>'+
       '<path d="M176 38Q184 33 192 38T208 38T224 38M176 46Q184 41 192 46T208 46T224 46M176 54Q184 49 192 54T208 54T224 54" fill="none" stroke="#7A1523" stroke-width=".8" opacity=".5"/></svg>';
     var a=document.createElement('article');
-    a.className='env'+(i===9?' pad kk':'')+(i===10?' pad':'');
+    a.className='env'+(i===9?' pad kk':'')+(i===10||i===11?' pad':'');
     a.style.setProperty('--r','rotate('+ROT[i]+'deg)');
     a.style.animationDelay=(i*0.1)+'s';
     a.innerHTML=svg;
@@ -603,8 +610,9 @@ form button:hover{background:var(--maroon-dark)}
   f.addEventListener('submit',function(e){
     e.preventDefault();note.textContent='Sending…';
     fetch(f.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{Accept:'application/json'},body:new FormData(f)})
-      .then(function(r){if(!r.ok)throw 0;f.reset();note.textContent='Thank you. Your work has been sent to the editors.';})
-      .catch(function(){note.textContent='Sorry, something went wrong. Please try again in a moment.';});
+      .then(function(r){return r.json();})
+      .then(function(j){if(String(j.success)==='false')throw 0;f.reset();note.textContent='Thank you. Your work has been sent to the editors.';})
+      .catch(function(){note.textContent='Sending it the long way round…';f.submit();});
   });
 })();
 </script>
@@ -673,7 +681,7 @@ form button:hover{background:var(--maroon-dark)}
   function srcs(c){var a=[];for(var i=0;i<c.count;i++)a.push('page-'+pad(c.start+i)+'.png');return a;}
 
   var v=document.createElement('div'); v.className='view'; v.id='v-archives';
-  v.innerHTML='<section style="padding-top:12px;position:relative"><div class="cat arch" data-pose="sit"></div><h2 class="section-title" style="text-align:center;margin-bottom:4px">Archives</h2>'+
+  v.innerHTML='<section style="padding-top:12px;position:relative"><div class="cat jumper" id="jcat" data-pose="sit"></div><h2 class="section-title" style="text-align:center;margin-bottom:4px">Archives</h2>'+
     '<p class="hand" style="text-align:center;font-size:1.3rem;margin-bottom:22px">Every edition of the Message Gazette</p>'+
     '<div class="fbtabs"></div><div class="fbsecs"></div></section>';
   main.appendChild(v);
@@ -780,7 +788,40 @@ form button:hover{background:var(--maroon-dark)}
     });
   },{rootMargin:'500px 0px'}):null;
   if(io) books.forEach(function(b){io.observe(b.sec);});
-  else v.addEventListener('archives-open',function(){books.forEach(build);});
+
+  /* The jumping cat: she sits on an edition heading and, as you scroll, leaps to the next one */
+  var jc=document.getElementById('jcat'),CW=92,CH=99,cur=0,jump=null,cx=0,cy=0,running=false,placed=false;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function spot(h){
+    var r=h.getBoundingClientRect(),nar=window.innerWidth<560;
+    return {x:r.left+r.width/2+(nar?64:104)-CW/2,y:Math.max(r.top-CH+8,6)};
+  }
+  function loop(ts){
+    if(!v.classList.contains('active')||!jc){if(jc)jc.style.display='none';running=false;placed=false;return;}
+    var H=books.map(function(b){return b.sec.querySelector('.fbh');}),trig=window.innerHeight*.62,want=0;
+    H.forEach(function(h,i){if(h.getBoundingClientRect().top<=trig)want=i;});
+    if(!jump&&want!==cur){
+      if(placed&&!still) jump={from:{x:cx,y:cy},to:want,t0:ts};
+      else cur=want;
+    }
+    var p;
+    if(jump){
+      var e=Math.min((ts-jump.t0)/850,1),tg=spot(H[jump.to]),k=e<.5?2*e*e:1-Math.pow(-2*e+2,2)/2,s=Math.sin(Math.PI*e);
+      var dist=Math.abs(tg.y-jump.from.y);
+      p={x:jump.from.x+(tg.x-jump.from.x)*k,y:jump.from.y+(tg.y-jump.from.y)*k-s*(70+Math.min(dist,600)*.12)};
+      jc.style.transform='translate('+p.x+'px,'+p.y+'px) rotate('+(-14*s)+'deg) scale('+(1+.06*s)+')';
+      if(e>=1){cur=jump.to;jump=null;jc.click();}
+    }else{
+      p=spot(H[cur]);
+      jc.style.transform='translate('+p.x+'px,'+p.y+'px)';
+    }
+    cx=p.x;cy=p.y;placed=true;jc.style.display='block';
+    requestAnimationFrame(loop);
+  }
+  v.addEventListener('archives-open',function(){
+    if(!io) books.forEach(build);
+    if(!running){running=true;requestAnimationFrame(loop);}
+  });
 })();
 </script>
 <script>
@@ -963,6 +1004,9 @@ form button:hover{background:var(--maroon-dark)}
     if(soundOn){ctx();}
   });
 })();
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
